@@ -1,10 +1,10 @@
 <template>
-  <ul class="l-sub-menu" @click="changeShowSub">
+  <ul class="l-sub-menu" @click.stop="changeShowSub">
     <div class="sub-title">
       <slot name="title" class="title"></slot>
       <div class="icon"></div>
     </div>
-    <div class="sub-item" v-show="isShow">
+    <div class="sub-item" @click.stop v-show="isShow">
       <slot></slot>
     </div>
   </ul>
@@ -22,10 +22,18 @@ const isShow = ref(false)
 const changeShowSub = () => {
   isShow.value = !isShow.value
 }
+//菜单图标点击旋转
 const iconRotate = computed(() => {
-  return isShow.value ? '45deg' : '225deg'
+  return isShow.value ? '225deg' : '45deg'
 })
 </script>
+
+<script lang="ts">
+export default {
+  name: 'l-sub-menu'
+}
+</script>
+
 <style scoped lang="scss">
 @import '../style/variable.scss';
 .l-sub-menu {
@@ -54,6 +62,7 @@ const iconRotate = computed(() => {
       margin-right: 15px;
     }
     &:hover {
+      background-color: #ecf5ff;
       > .sub-title {
         &:after {
           transform: rotate(45deg);
@@ -62,7 +71,6 @@ const iconRotate = computed(() => {
     }
   }
   .sub-item {
-    background: #ffffff;
     top: 0;
     padding-left: 10px;
   }

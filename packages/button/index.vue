@@ -92,4 +92,12 @@ const lClass = computed(() => {
     cursor: not-allowed;
   }
 }
+.l-button-disabled {
+  &:hover {
+    filter: brightness(1);
+  }
+  &:active {
+    filter: brightness(1);
+  }
+}
 </style>

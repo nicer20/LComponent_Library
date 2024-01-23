@@ -42,10 +42,10 @@ body {
     border-right: 2px solid $l-border-color-lightgrey;
     .temp_menu {
       display: flex;
-      align-items: center;
       justify-content: center;
       font-size: medium;
       cursor: pointer;
+      padding-left: 10px;
       flex-direction: column;
     }
   }
