@@ -12,11 +12,11 @@
 <script lang="ts" setup>
 import { reactive, computed } from 'vue'
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['clickItem'])
 
 const props = defineProps({
-  disabled: Boolean,
-  index: String
+  index: String,
+  disabled: Boolean
 })
 
 const itemData = reactive({
@@ -24,7 +24,7 @@ const itemData = reactive({
 })
 
 const handleClick = () => {
-  emit('click', itemData)
+  emit('clickItem', itemData)
 }
 
 const lClass = computed(() => {
@@ -37,8 +37,14 @@ const lClass = computed(() => {
   cursor: pointer;
   list-style-type: none;
   &.l-menu-item-disabled {
-    color: red;
+    color: #dedfe0;
     cursor: not-allowed;
+    &:hover {
+      color: #dedfe0;
+    }
+    &:active {
+      color: #dedfe0;
+    }
   }
 }
 </style>

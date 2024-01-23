@@ -1,10 +1,10 @@
 <template>
-  <ul class="l-sub-menu" @click="changeShowSub">
+  <ul class="l-sub-menu" @click.stop="changeShowSub">
     <div class="sub-title">
       <slot name="title" class="title"></slot>
       <div class="icon"></div>
     </div>
-    <div class="sub-item" v-show="isShow">
+    <div class="sub-item" @click.stop v-show="isShow">
       <slot></slot>
     </div>
   </ul>
@@ -22,8 +22,9 @@ const isShow = ref(false)
 const changeShowSub = () => {
   isShow.value = !isShow.value
 }
+//菜单图标点击旋转
 const iconRotate = computed(() => {
-  return isShow.value ? '45deg' : '225deg'
+  return isShow.value ? '225deg' : '45deg'
 })
 </script>
 <style scoped lang="scss">
@@ -62,7 +63,7 @@ const iconRotate = computed(() => {
     }
   }
   .sub-item {
-    background: #ffffff;
+    background: snow;
     top: 0;
     padding-left: 10px;
   }
