@@ -4,6 +4,11 @@
   </ul>
 </template>
 <script lang="ts" setup></script>
+<script lang="ts">
+export default {
+  name: 'l-menu'
+}
+</script>
 <style scoped lang="scss">
 .l-menu {
   width: 200px;
@@ -12,5 +17,6 @@
   position: relative;
   background-color: snow;
   box-sizing: border-box;
+  padding-left: 0;
 }
 </style>

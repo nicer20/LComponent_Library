@@ -1,6 +1,6 @@
 <template>
-  <l-menu
-    ><l-menu-item index="1">base</l-menu-item>
+  <l-menu>
+    <l-menu-item index="1">base</l-menu-item>
     <l-menu-item index="2" disabled="true">layout</l-menu-item>
     <l-sub-menu>
       <template #title>test1</template>
@@ -13,6 +13,12 @@
         <l-menu-item index="2-4-2">tap</l-menu-item>
         <l-menu-item index="2-4-3">top</l-menu-item>
       </l-sub-menu>
+    </l-sub-menu>
+    <l-sub-menu>
+      <template #title>test3</template>
+      <l-menu-item index="2-5-1">tip</l-menu-item>
+      <l-menu-item index="2-5-2" disabled>tap</l-menu-item>
+      <l-menu-item index="2-5-3">top</l-menu-item>
     </l-sub-menu>
   </l-menu>
 </template>

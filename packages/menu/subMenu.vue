@@ -27,6 +27,13 @@ const iconRotate = computed(() => {
   return isShow.value ? '225deg' : '45deg'
 })
 </script>
+
+<script lang="ts">
+export default {
+  name: 'l-sub-menu'
+}
+</script>
+
 <style scoped lang="scss">
 @import '../style/variable.scss';
 .l-sub-menu {
@@ -55,6 +62,7 @@ const iconRotate = computed(() => {
       margin-right: 15px;
     }
     &:hover {
+      background-color: #ecf5ff;
       > .sub-title {
         &:after {
           transform: rotate(45deg);
@@ -63,7 +71,6 @@ const iconRotate = computed(() => {
     }
   }
   .sub-item {
-    background: snow;
     top: 0;
     padding-left: 10px;
   }
