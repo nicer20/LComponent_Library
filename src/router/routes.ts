@@ -23,6 +23,11 @@ export const constRoutes = [
             path: 'menu',
             name: 'Menu',
             component: () => import('../../packages/menu/index.vue')
+          },
+          {
+            path: 'table',
+            name: 'Table',
+            component: () => import('../../packages/table/doc/Demo.vue')
           }
         ]
       }
