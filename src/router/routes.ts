@@ -23,6 +23,11 @@ export const constRoutes = [
             path: 'menu',
             name: 'Menu',
             component: () => import('../../packages/menu/doc/Demo.vue')
+          },
+          {
+            path: 'scrollbar',
+            name: 'Scrollbar',
+            component: () => import('../../packages/scrollbar/doc/Demo.vue')
           }
         ]
       }

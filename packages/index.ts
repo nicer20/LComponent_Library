@@ -4,6 +4,7 @@ import { ButtonPlugin } from './button'
 import { PreviewPlugin } from './utils'
 import { DividerPlugin } from './divider'
 import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
+import { ScrollbarPlugin } from "./scrollbar";
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -13,6 +14,7 @@ const LPlugin: Plugin = {
     MenuPlugin.install?.(app)
     MenuItemPlugin.install?.(app)
     SubMenuPlugin.install?.(app)
+    ScrollbarPlugin.install?.(app)
   }
 }
 
