@@ -2,15 +2,15 @@
   <div class="previewcase">
     <button style="border: hidden; background: #fff" @click="changeShow">展示代码</button>
     <div v-show="showCode">
-      <pre class="language-html">{{ sourceCode }}</pre>
+      <pre class="language-html"><code class="language-html">{{ sourceCode }}</code></pre>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Prism from 'prismjs'
-import '@/assets/prism.css'
+import '../../src/assets/prism.css'
 
 let showCode = ref(false)
 const changeShow = () => {
@@ -40,8 +40,7 @@ const getCode = async () => {
 }
 
 onMounted(async () => {
-  getCode()
-  await nextTick()
+  await getCode()
   // 确保在源码都渲染好了以后再执行高亮
   Prism.highlightAll()
 })

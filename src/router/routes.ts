@@ -22,7 +22,7 @@ export const constRoutes = [
           {
             path: 'menu',
             name: 'Menu',
-            component: () => import('../../packages/menu/index.vue')
+            component: () => import('../../packages/menu/doc/Demo.vue')
           }
         ]
       }

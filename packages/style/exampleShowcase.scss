@@ -1,0 +1,8 @@
+@import './variable.scss';
+.example-showcase {
+  background-color: $l-showcase-background-white;
+  width: 100%;
+  border: solid 1px $l-border-color-lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+}
