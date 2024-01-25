@@ -1,12 +1,27 @@
 <!--  文档页面  -->
 <script setup lang="ts">
-
+import Demo1 from "./demo1.vue"
 </script>
 
 <template>
-
+  <h1>Switch 开关</h1>
+  <p>表示两种相互对立的状态间的切换，多用于触发「开/关」。</p>
+  <h2>基础用法</h2>
+  <p>绑定 v-model 到一个 Boolean 类型的变量。 可以使用 activeColor 属性与 switch-off-color 属性来设置开关的背景色。</p>
+  <div class="example-showcase">
+    <Demo1 />
+    <l-divider></l-divider>
+    <l-preview compName="switch" demoName="demo1"></l-preview>
+  </div>
 </template>
 
 <style scoped lang="scss">
-
+@import '../../style/variable.scss';
+.example-showcase {
+  background-color: white;
+  width: 100%;
+  border: solid 1px $l-border-color-lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+}
 </style>
