@@ -71,8 +71,11 @@ const stopDrag = () => {
 }
 const handleScroll = (event: WheelEvent) => {
   const delta = Math.max(-1, Math.min(1, event.deltaY))
-  const maxScrollTop = contentHeight.value - containerHeight.value
   containerRef.value.scrollTop += delta * 40
+  const newScrollTop = containerRef.value.scrollTop
+  const thumbTrans = Math.max((Math.min((newScrollTop / scrollRatio.value), (contentHeight.value - thumbHeight.value))), 0)
+  //更新thumb
+  thumbRef.value.style.transform = `translateY(${thumbTrans}px)`
   event.preventDefault()
 }
 onMounted(() => {
