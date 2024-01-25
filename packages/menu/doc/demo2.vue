@@ -1,5 +1,5 @@
 <template>
-  <l-menu>
+  <l-menu mode="horizontal">
     <l-menu-item index="1">base</l-menu-item>
     <l-menu-item index="2" disabled="true">layout</l-menu-item>
     <l-sub-menu>
@@ -24,3 +24,4 @@
 </template>
 <script lang="ts" setup></script>
 <style scoped lang="scss"></style>
+v

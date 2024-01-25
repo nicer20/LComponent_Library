@@ -1,15 +1,19 @@
 <template>
   <div class="container">
     <div class="left_menu">
-      <h2>Base 基础</h2>
-      <div
-        class="temp_menu"
-        v-for="item in constRoutes[0].children[0].children"
-        :key="item.name"
-        @click="$router.push(item.path)"
-      >
-        {{ item.name }}
-      </div>
+      <l-menu>
+        <l-sub-menu>
+          <template #title>Base 基础</template>
+          <l-menu-item
+            v-for="item in constRoutes[0].children[0].children"
+            :key="item.name"
+            :index="item.path"
+            @click="$router.push(item.path)"
+          >
+            {{ item.name }}
+          </l-menu-item>
+        </l-sub-menu>
+      </l-menu>
     </div>
     <div class="right_main">
       <router-view></router-view>
@@ -52,12 +56,12 @@ body {
 
   .right_main {
     flex: 7;
-    height: 100%;
+    height: 100vh;
     width: auto;
     min-width: 700px;
     box-sizing: border-box;
     overflow-x: auto;
-    overflow-y: auto;
+    overflow-y: visible;
     padding: 0 10px;
   }
 }
