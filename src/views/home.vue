@@ -13,6 +13,17 @@
             {{ item.name }}
           </l-menu-item>
         </l-sub-menu>
+        <l-sub-menu>
+          <template #title>Form 表单组件</template>
+          <l-menu-item
+              v-for="item in constRoutes[0].children[1].children"
+              :key="item.name"
+              :index="item.path"
+              @click="$router.push(item.path)"
+          >
+            {{ item.name }}
+          </l-menu-item>
+        </l-sub-menu>
       </l-menu>
     </div>
     <div class="right_main">

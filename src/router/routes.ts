@@ -25,6 +25,17 @@ export const constRoutes = [
             component: () => import('../../packages/menu/doc/Demo.vue')
           }
         ]
+      },
+      {
+        path: 'form',
+        redirect: '/switch',
+        children: [
+          {
+            path: 'switch',
+            name: 'Switch',
+            component: () => import('../../packages/switch/doc/Demo.vue')
+          },
+        ]
       }
     ]
   }
