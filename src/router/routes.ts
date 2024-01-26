@@ -7,6 +7,7 @@ export const constRoutes = [
     children: [
       {
         path: 'base',
+        name: 'Base 基础',
         redirect: '/button',
         children: [
           {

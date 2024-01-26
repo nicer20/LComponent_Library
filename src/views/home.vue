@@ -2,8 +2,8 @@
   <div class="container">
     <div class="left_menu">
       <l-menu>
-        <l-sub-menu>
-          <template #title>Base 基础</template>
+        <l-sub-menu v-for="item in constRoutes[0].children" :key="item.name">
+          <template #title>{{ item.name }}</template>
           <l-menu-item
             v-for="item in constRoutes[0].children[0].children"
             :key="item.name"
