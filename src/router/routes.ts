@@ -29,6 +29,7 @@ export const constRoutes = [
       },
       {
         path: 'form',
+        name: 'Form 表单组件',
         redirect: '/switch',
         children: [
           {
