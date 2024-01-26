@@ -2,13 +2,13 @@
   <div class="container">
     <div class="left_menu">
       <l-menu>
-        <l-sub-menu v-for="item in constRoutes[0].children" :key="item.name">
-          <template #title>{{ item.name }}</template>
+        <l-sub-menu v-for="child in constRoutes[0].children" :key="child.name">
+          <template #title>{{ child.name }}</template>
           <l-menu-item
-            v-for="item in constRoutes[0].children[0].children"
-            :key="item.name"
-            :index="item.path"
-            @click="$router.push(item.path)"
+              v-for="item in child.children"
+              :key="item.name"
+              :index="item.path"
+              @click="$router.push(`../${child.path}/${item.path}`)"
           >
             {{ item.name }}
           </l-menu-item>
