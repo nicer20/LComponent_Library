@@ -7,7 +7,7 @@ import Demo1 from "./demo1.vue"
   <h1>Switch 开关</h1>
   <p>表示两种相互对立的状态间的切换，多用于触发「开/关」。</p>
   <h2>基础用法</h2>
-  <p>绑定 v-model 到一个 Boolean 类型的变量。 可以使用 activeColor 属性与 switch-off-color 属性来设置开关的背景色。</p>
+  <p>绑定 v-model(:value="value1" @update:value) 到一个 Boolean 类型的变量。 可以使用 activeColor 属性与 inactiveColor 属性来设置开关的背景色。</p>
   <div class="example-showcase">
     <Demo1 />
     <l-divider></l-divider>

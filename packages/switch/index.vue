@@ -1,6 +1,6 @@
 <!--这里实现 Switch 组件功能-->
 <script setup lang="ts">
-import { computed } from 'vue'
+import {ref, onMounted, computed} from 'vue'
 
 const props = defineProps({
   value: {
@@ -8,29 +8,28 @@ const props = defineProps({
     default: false
   },
   activeColor:String,
-  inactiveColor:String,
-  color: String
+  inactiveColor:String
 })
 const emit = defineEmits(['update:value'])
 const toggleSwitch = () => {
   emit('update:value',!props.value)
 }
 
-// const lClass = computed(() => {
-//   return [
-//     `l-button-${props.value}`,
-//     props.color ? 'l-switch-on-Color' : ''
-//   ]
-// })
+const lClass = computed(() => {
+  return [
+    props.value&&props.activeColor ? 'l-switch-activeColor' : '',
+    !(props.value)&&props.inactiveColor ? 'l-switch-inactiveColor' : '',
+  ]
+})
 
 defineExpose({
-  toggleSwitch
+  toggleSwitch,
 })
 </script>
 
 <template>
-<label class="l-switch" @click="toggleSwitch">
-  <span class="l-switch_core">
+<label class="l-switch" :class="{'is-checked': value}" @click="toggleSwitch">
+  <span class="l-switch_core" :class="lClass" >
     <!--用button做小圆球-->
     <span class="l-switch_button"></span>
   </span>
@@ -59,6 +58,10 @@ defineExpose({
     cursor: pointer;
     transition: border-color .3s,background-color .3s;
     vertical-align: middle;
+    &.l-switch-inactiveColor {
+      border-color: v-bind('props.inactiveColor');
+      background-color: v-bind('props.inactiveColor');
+    }
     .l-switch_button{
       position: absolute;
       top:1px;
@@ -68,6 +71,19 @@ defineExpose({
       width: 16px;
       height: 16px;
       background-color: #fff;
+    }
+  }
+}
+.l-switch.is-checked{
+  .l-switch_core{
+    border-color: #409eff;
+    background-color: #409eff;
+    &.l-switch-activeColor {
+      border-color: v-bind('props.activeColor');
+      background-color: v-bind('props.activeColor');
+    }
+    .l-switch_button{
+      transform: translateX(20px);
     }
   }
 }
