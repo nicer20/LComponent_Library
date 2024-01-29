@@ -1,6 +1,7 @@
 <!--  文档页面  -->
 <script setup lang="ts">
 import Demo1 from "./demo1.vue"
+import Demo2 from './demo2.vue'
 </script>
 
 <template>
@@ -12,6 +13,14 @@ import Demo1 from "./demo1.vue"
     <Demo1 />
     <l-divider></l-divider>
     <l-preview compName="switch" demoName="demo1"></l-preview>
+  </div>
+  <h2>禁用状态</h2>
+  <p>你可以使用 disabled 属性来定义开关是否被禁用。</p>
+  <p>使用 disabled 属性来控制开关是否为禁用状态。 该属性接受一个 Boolean 类型的值。</p>
+  <div class="example-showcase">
+    <Demo2 />
+    <l-divider></l-divider>
+    <l-preview compName="switch" demoName="demo2"></l-preview>
   </div>
 </template>
 

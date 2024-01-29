@@ -1,6 +1,6 @@
 <!--这里实现 Switch 组件功能-->
 <script setup lang="ts">
-import {ref, onMounted, computed} from 'vue'
+import {computed} from 'vue'
 
 const props = defineProps({
   value: {
@@ -8,7 +8,8 @@ const props = defineProps({
     default: false
   },
   activeColor:String,
-  inactiveColor:String
+  inactiveColor:String,
+  disabled:Boolean,
 })
 const emit = defineEmits(['update:value'])
 const toggleSwitch = () => {
@@ -19,6 +20,7 @@ const lClass = computed(() => {
   return [
     props.value&&props.activeColor ? 'l-switch-activeColor' : '',
     !(props.value)&&props.inactiveColor ? 'l-switch-inactiveColor' : '',
+    props.disabled ? 'l-switch-disabled' : '',
   ]
 })
 
@@ -28,8 +30,8 @@ defineExpose({
 </script>
 
 <template>
-<label class="l-switch" :class="{'is-checked': value}" @click="toggleSwitch">
-  <span class="l-switch_core" :class="lClass" >
+<label class="l-switch" :class="{'is-checked': value,'disabled': disabled}">
+  <span class="l-switch_core" :class="lClass" @click="toggleSwitch">
     <!--用button做小圆球-->
     <span class="l-switch_button"></span>
   </span>
@@ -84,6 +86,15 @@ defineExpose({
     }
     .l-switch_button{
       transform: translateX(20px);
+    }
+  }
+}
+.l-switch.disabled{
+  cursor: not-allowed;
+  .l-switch_core{
+    &.l-switch-disabled {
+      pointer-events: none;
+      filter: brightness(0.8);
     }
   }
 }
