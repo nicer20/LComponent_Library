@@ -13,13 +13,14 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:value'])
 const toggleSwitch = () => {
+  if(props.disabled){return}
   emit('update:value',!props.value)
 }
 
 const lClass = computed(() => {
   return [
-    props.value&&props.activeColor ? 'l-switch-activeColor' : '',
-    !(props.value)&&props.inactiveColor ? 'l-switch-inactiveColor' : '',
+    props.value && props.activeColor ? 'l-switch-activeColor' : '',
+    !(props.value) && props.inactiveColor ? 'l-switch-inactiveColor' : '',
     props.disabled ? 'l-switch-disabled' : '',
   ]
 })
@@ -93,7 +94,7 @@ defineExpose({
   cursor: not-allowed;
   .l-switch_core{
     &.l-switch-disabled {
-      pointer-events: none;
+      cursor: not-allowed;
       filter: brightness(0.8);
     }
   }
