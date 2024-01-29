@@ -40,6 +40,7 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
+@import '../../packages/style/variable.scss';
 .l-switch{
   display: inline-flex;
   align-items: center;
@@ -53,11 +54,11 @@ defineExpose({
     position: relative;
     width: 40px;
     height: 20px;
-    border: 1px solid #dcdfe6;
+    border: 1px solid $l-switch_core-off;
     outline: none;
     border-radius: 10px;
     box-sizing: border-box;
-    background: #dcdfe6;
+    background: $l-switch_core-off;
     cursor: pointer;
     transition: border-color .3s,background-color .3s;
     vertical-align: middle;
@@ -73,14 +74,14 @@ defineExpose({
       transition: all .3s;
       width: 16px;
       height: 16px;
-      background-color: #fff;
+      background-color: $l-switch_button;
     }
   }
 }
 .l-switch.is-checked{
   .l-switch_core{
-    border-color: #409eff;
-    background-color: #409eff;
+    border-color: $l-switch_core-on;
+    background-color: $l-switch_core-on;
     &.l-switch-activeColor {
       border-color: v-bind('props.activeColor');
       background-color: v-bind('props.activeColor');
