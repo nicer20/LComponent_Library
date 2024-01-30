@@ -1,21 +1,24 @@
 <template>
   <div class="l-scrollbar-container" ref="containerRef" @wheel="handleScroll">
     <div class="l-scrollbar-content" ref="contentRef">
-      <slot></slot>
+      <slot ref="slotRef"></slot>
     </div>
-    <div class="l-scrollbar-track">
+    <div class="l-scrollbar-track" ref="trackRef">
       <div class="l-scrollbar-thumb" @mousedown="startDrag" ref="thumbRef">
       </div>
     </div>
   </div>
 </template> 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 //获取容器实例 
 const containerRef = ref<HTMLElement | null>(null)
 //获取内容实例 
 const contentRef = ref<HTMLElement | null>(null)
 const thumbRef = ref<HTMLElement | null>(null)
+const trackRef = ref<HTMLElement | null>(null)
+//获取插槽dom
+const slotRef = ref<HTMLElement | null>(null)
 //是否拖拽 
 const isDragging = ref(false)
 //拖拽位置 
@@ -25,6 +28,8 @@ const containerHeight = ref(0)
 const contentHeight = ref(0)
 const thumbHeight = ref(0)
 const scrollRatio = ref(0)
+
+
 //更新高度 
 const updateScrollbarHeight = () => {
   //获取容器高度 
@@ -37,7 +42,7 @@ const updateScrollbarHeight = () => {
   thumbHeight.value = (containerHeight.value / contentHeight.value) * containerHeight.value
   // console.log(thumbHeight.value)//132
   //thumb相对于滚动条的滚动率 
-  scrollRatio.value = (contentHeight.value - containerHeight.value) / (contentHeight.value - thumbHeight.value)
+  scrollRatio.value = (contentHeight.value - containerHeight.value) / (containerHeight.value - thumbHeight.value)
 
 }
 //拖拽开始 
@@ -49,31 +54,37 @@ const startDrag = (event: MouseEvent) => {
   document.addEventListener('mousemove', handleDrag)
   document.addEventListener('mouseup', stopDrag)
 }
-
+//拖拽处理
 const handleDrag = (event: MouseEvent) => {
   if (isDragging.value) {
     //鼠标偏移量与条偏移量
-    const newScrollTop = (event.clientY - containerRef.value.getBoundingClientRect().top - dragOffset.value) / containerHeight.value * (contentHeight.value - thumbHeight.value) * scrollRatio.value
+    const newScrollTop = (event.clientY - containerRef.value.getBoundingClientRect().top - dragOffset.value) / containerHeight.value * (containerHeight.value - thumbHeight.value) * scrollRatio.value
     containerRef.value.scrollTop = newScrollTop
+    //滑轨相对不动
+    trackRef.value.style.top = `${Math.max(Math.min(newScrollTop, 800), 0)}px`
     //限制上下界
-    const thumbTrans = Math.max((Math.min((newScrollTop / scrollRatio.value), (contentHeight.value - thumbHeight.value))), 0)
+    const thumbTrans = Math.max((Math.min((newScrollTop / scrollRatio.value), (containerHeight.value - thumbHeight.value))), 0)
     /*  const thumbOriginTrans = thumbRef.value.style.transform.slice(11, 17)
      console.log(thumbOriginTrans) */
     //更新thumb 
     thumbRef.value.style.transform = `translateY(${thumbTrans}px)`
   }
 }
+//停止拖拽
 const stopDrag = () => {
   //置0 
   isDragging.value = false //溢出 
   document.removeEventListener('mousemove', handleDrag)
   document.removeEventListener('mouseup', stopDrag)
 }
+//滚轮处理
 const handleScroll = (event: WheelEvent) => {
   const delta = Math.max(-1, Math.min(1, event.deltaY))
   containerRef.value.scrollTop += delta * 40
   const newScrollTop = containerRef.value.scrollTop
-  const thumbTrans = Math.max((Math.min((newScrollTop / scrollRatio.value), (contentHeight.value - thumbHeight.value))), 0)
+  const thumbTrans = Math.max((Math.min((newScrollTop / scrollRatio.value), (containerHeight.value - thumbHeight.value))), 0)
+  //滑轨相对不动
+  trackRef.value.style.top = `${Math.min(newScrollTop, 800)}px`
   //更新thumb
   thumbRef.value.style.transform = `translateY(${thumbTrans}px)`
   event.preventDefault()
@@ -92,7 +103,7 @@ const scrollStyle = computed(() => {
   return {
     thumbHeight: `${thumbHeight.value}px`,
     thumbTransform: `translateY(${thumbTop}px)`,
-    contentHeight: `${containerRef.value?.scrollHeight}px`
+    containerHeight: `${containerRef.value?.offsetHeight}px`
   };
 });
 // 接收 height 属性 
@@ -103,12 +114,7 @@ const props = defineProps({
   },
 })
 </script> 
-<style scoped lang="scss"> ::-webkit-scrollbar {
-   //.page可以更换为任意元素 
-   display: none;
- }
-
- .l-scrollbar-container {
+<style scoped lang="scss"> .l-scrollbar-container {
    position: relative;
    overflow: hidden;
    width: 100%;
@@ -117,6 +123,7 @@ const props = defineProps({
    .l-scrollbar-content {
      height: max-content;
      overflow-y: scroll;
+     overflow-x: scroll;
    }
 
    .l-scrollbar-track {
@@ -124,14 +131,14 @@ const props = defineProps({
      top: 2px;
      right: 2px;
      width: 8px;
-     height: v-bind('scrollStyle.contentHeight');
+     height: v-bind('scrollStyle.containerHeight');
      background-color: #f1f1f1;
      border-radius: 4px;
      opacity: 0;
      transition: opacity 0.3s;
 
      .l-scrollbar-thumb {
-       position: absolute;
+       position: relative;
        top: 2px;
        width: 100%;
        height: v-bind('scrollStyle.thumbHeight');
@@ -149,6 +156,11 @@ const props = defineProps({
          background-color: #333;
        }
      }
+   }
+
+   ::-webkit-scrollbar {
+     //.page可以更换为任意元素 
+     display: none;
    }
  }
 
