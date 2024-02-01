@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import {computed, ref} from 'vue'
 
-const inputRef = ref(null)
+const inputRef = ref()
 
 const props = defineProps({
   value: {
