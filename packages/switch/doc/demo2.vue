@@ -1,6 +1,7 @@
 <template>
   <div class="l-row">
-    <l-switch :value="value2" @update:value="updateSwitchValue2" />
+    <l-switch :value="value2" @update:value="updateSwitchValue2"
+    name="username"/>
       <l-switch
           :value="value1" @update:value="updateSwitchValue" disabled
       />
