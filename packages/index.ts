@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue'
 //按钮插件
 import { ButtonPlugin } from './button'
-import { PreviewPlugin } from './uitls'
+import { PreviewPlugin } from './utils'
 import { DividerPlugin } from './divider'
 import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
 import { TablePlugin } from './table'
@@ -20,7 +20,7 @@ const LPlugin: Plugin = {
 
 export default LPlugin
 export * from './button'
-export * from './uitls'
+export * from './utils'
 export * from './divider'
 export * from './menu'
 export * from './table'

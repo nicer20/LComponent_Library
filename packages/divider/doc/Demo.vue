@@ -12,4 +12,6 @@
 <script lang="ts" setup>
 import Demo1 from "./demo1.vue"
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import '../../style/exampleShowcase.scss';
+</style>
