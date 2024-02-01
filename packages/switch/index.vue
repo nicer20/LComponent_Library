@@ -37,6 +37,12 @@ const lClass = computed(() => {
     props.disabled ? 'l-switch-disabled' : '',
   ]
 })
+const lClass_button = computed(() => {
+  return [
+    props.size==='large'?'l-switch-large' : '',
+    props.size==='small'?'l-switch-small' : '',
+  ]
+})
 
 defineExpose({
   toggleSwitch,
@@ -45,10 +51,11 @@ defineExpose({
 </script>
 
 <template>
-  <div class="l-switch" :class="{'is-checked': value,'disabled': disabled}">
+  <div class="l-switch" :class="{'is-checked': value,'disabled': disabled,
+  'large':size==='large','small':size==='small'}">
     <span class="l-switch_core" :class="lClass" @click="toggleSwitch">
     <!--用button做小圆球-->
-    <span class="l-switch_button"></span>
+    <span class="l-switch_button" :class="lClass_button"></span>
   </span>
     <!--添加input，以便于支持name属性-->
     <input
@@ -97,7 +104,6 @@ defineExpose({
       border-color: v-bind('props.inactiveColor');
       background-color: v-bind('props.inactiveColor');
     }
-
     .l-switch_button {
       position: absolute;
       top: 1px;
@@ -120,9 +126,14 @@ defineExpose({
       border-color: v-bind('props.activeColor');
       background-color: v-bind('props.activeColor');
     }
-
     .l-switch_button {
       transform: translateX(20px);
+      &.l-switch-large {
+        transform: translateX(25px);
+      }
+      &.l-switch-small {
+        transform: translateX(15px);
+      }
     }
   }
 }
@@ -134,6 +145,27 @@ defineExpose({
     &.l-switch-disabled {
       cursor: not-allowed;
       filter: brightness(0.8);
+    }
+  }
+}
+.l-switch.large{
+  .l-switch_core {
+    border-radius: 20px;
+      width: 50px;
+      height: 25px;
+    .l-switch_button {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+.l-switch.small{
+  .l-switch_core {
+    width: 30px;
+    height: 15px;
+    .l-switch_button {
+      width: 12px;
+      height: 12px;
     }
   }
 }

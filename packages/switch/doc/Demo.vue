@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import Demo1 from "./demo1.vue"
 import Demo2 from './demo2.vue'
+import Demo3 from './demo3.vue'
 </script>
 
 <template>
@@ -21,6 +22,14 @@ import Demo2 from './demo2.vue'
     <Demo2 />
     <l-divider></l-divider>
     <l-preview compName="switch" demoName="demo2"></l-preview>
+  </div>
+  <h2>尺寸</h2>
+  <p>你可以使用 size 属性来设置开关尺寸。</p>
+  <p>使用 size 属性来设置开关尺寸。 该属性可设置为"large"或"small"。</p>
+  <div class="example-showcase">
+    <Demo3 />
+    <l-divider></l-divider>
+    <l-preview compName="switch" demoName="demo3"></l-preview>
   </div>
 </template>
 
