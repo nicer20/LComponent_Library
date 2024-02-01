@@ -2,17 +2,10 @@
   <div class="container">
     <div class="left_menu">
       <l-menu>
-        <l-sub-menu>
-          <template #title>Base 基础</template>
-          <l-menu-item v-for="item in constRoutes[0].children[0].children" :key="item.name" :index="item.path"
-            @click="$router.push(`../${constRoutes[0].children[0].path}/${item.path}`)">
-            {{ item.name }}
-          </l-menu-item>
-        </l-sub-menu>
-        <l-sub-menu>
-          <template #title>Data 数据展示</template>
-          <l-menu-item v-for="item in constRoutes[0].children[1].children" :key="item.name" :index="item.path"
-            @click="$router.push(`../${constRoutes[0].children[1].path}/${item.path}`)">
+        <l-sub-menu v-for="child in constRoutes[0].children" :key="child.name">
+          <template #title>{{ child.name }}</template>
+          <l-menu-item v-for="item in child.children" :key="item.name" :index="item.path"
+            @click="$router.push(`../${child.path}/${item.path}`)">
             {{ item.name }}
           </l-menu-item>
         </l-sub-menu>

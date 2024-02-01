@@ -7,6 +7,7 @@ export const constRoutes = [
     children: [
       {
         path: 'base',
+        name: 'Base 基础',
         redirect: '/button',
         children: [
           {
@@ -28,6 +29,7 @@ export const constRoutes = [
       },
       {
         path:'data_show',
+        name:"数据展示",
         redirect:'/table',
         children:[
           {
