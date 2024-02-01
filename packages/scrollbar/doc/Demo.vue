@@ -8,12 +8,24 @@
     <l-divider></l-divider>
     <l-preview compName="scrollbar" demoName="demo1"></l-preview>
   </div>
+  <h2>横向滚动</h2>
+  <p>当元素宽度大于滚动条宽度时，会显示横向滚动条。</p>
+  <div class="example-showcase">
+    <Demo2 />
+    <l-divider></l-divider>
+    <l-preview compName="scrollbar" demoName="demo2"></l-preview>
+  </div>
 </template>
 
 <script setup lang="ts">
 import Demo1 from "./demo1.vue";
+import Demo2 from "./demo2.vue"
 </script>
 
 <style scoped lang="scss">
 @import '../../style/exampleShowcase.scss';
+
+.example-showcase {
+  width: 650px;
+}
 </style>
