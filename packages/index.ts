@@ -4,6 +4,7 @@ import { ButtonPlugin } from './button'
 import { PreviewPlugin } from './utils'
 import { DividerPlugin } from './divider'
 import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
+import { TablePlugin } from './table'
 // wly
 import {SwitchPlugin} from "./switch"
 
@@ -15,6 +16,7 @@ const LPlugin: Plugin = {
     MenuPlugin.install?.(app)
     MenuItemPlugin.install?.(app)
     SubMenuPlugin.install?.(app)
+    TablePlugin.install?.(app)
 
     SwitchPlugin.install?.(app)
   }
@@ -25,4 +27,5 @@ export * from './button'
 export * from './utils'
 export * from './divider'
 export * from './menu'
+export * from './table'
 export * from './switch'

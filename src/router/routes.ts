@@ -28,6 +28,18 @@ export const constRoutes = [
         ]
       },
       {
+        path:'data_show',
+        name:"数据展示",
+        redirect:'/table',
+        children:[
+          {
+            path:'table',
+            name:'Table',
+            component: () => import('../../packages/table/doc/Demo.vue')
+          }
+        ]},
+        {
+
         path: 'form',
         name: 'Form 表单组件',
         redirect: '/switch',
