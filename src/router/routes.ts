@@ -26,6 +26,18 @@ export const constRoutes = [
             component: () => import('../../packages/menu/doc/Demo.vue')
           }
         ]
+      },
+      {
+        path: 'form',
+        name: 'Form 表单组件',
+        redirect: '/switch',
+        children: [
+          {
+            path: 'switch',
+            name: 'Switch',
+            component: () => import('../../packages/switch/doc/Demo.vue')
+          },
+        ]
       }
     ]
   }
