@@ -15,11 +15,19 @@
     <l-divider></l-divider>
     <l-preview compName="scrollbar" demoName="demo2"></l-preview>
   </div>
+  <h2>最大高度</h2>
+  <p>当元素高度超过最大高度，才会显示滚动条。</p>
+  <div class="example-showcase">
+    <Demo3 />
+    <l-divider></l-divider>
+    <l-preview compName="scrollbar" demoName="demo3"></l-preview>
+  </div>
 </template>
 
 <script setup lang="ts">
 import Demo1 from "./demo1.vue";
 import Demo2 from "./demo2.vue"
+import Demo3 from "./demo3.vue"
 </script>
 
 <style scoped lang="scss">

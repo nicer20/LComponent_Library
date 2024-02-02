@@ -14,7 +14,7 @@
   </div>
 </template> 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 //获取容器实例 
 const containerRef = ref<HTMLElement | null>(null)
 //获取内容实例 
@@ -24,6 +24,8 @@ const verticalThumbRef = ref<HTMLElement | null>(null)
 const trackRef = ref<HTMLElement | null>(null)
 // 滚动条水平垂直判定(false水平，true垂直)
 let trackFlag = ref(true)
+//是否超过最大高度判定
+let maxHeightFlag = ref(true)
 //是否拖拽 
 const isDragging = ref(false)
 //拖拽位置 
@@ -137,6 +139,14 @@ const handleScroll = (event: WheelEvent) => {
     event.preventDefault()
   }
 }
+//
+const handleParentBoxMutation = (mutations) => {
+  // console.log(contentRef.value.offsetHeight);
+  //true显示，false不显示
+  maxHeightFlag.value = props.maxHeight === undefined ? true : contentRef.value.offsetHeight > parseInt(props.maxHeight.slice(0, 3))
+  updateScrollbarHeight()
+  // console.log(contentRef.value.offsetHeight > parseInt(props.maxHeight.slice(0, 3)));
+}
 //挂载处理
 onMounted(() => {
   //水平垂直自动判断
@@ -148,7 +158,25 @@ onMounted(() => {
     //水平
     updateScrollbarLeft()
   }
+  if (props.maxHeight !== undefined && (contentRef.value.offsetHeight < parseInt(props.maxHeight.slice(0, 3)))) {
+    //小于maxheight初始置flase
+    maxHeightFlag.value = false
+  }
   // console.log(trackFlag.value);
+  const observer = new MutationObserver((mutations) => {
+    // 在每次变化时执行处理函数
+    handleParentBoxMutation(mutations)
+  })
+
+  // 配置观察选项
+  const config = {
+    attributes: true, // 监视属性变化
+    childList: true, // 监视子节点变化
+    subtree: true // 监视所有后代节点
+  }
+
+  // 开始观察父盒子的变化
+  observer.observe(contentRef.value, config)
 })
 //卸载处理
 onUnmounted(() => {
@@ -159,7 +187,7 @@ onUnmounted(() => {
 const flagStyle = computed(() => {
   return {
     //true为垂直
-    verticalFlag: trackFlag.value ? 'block' : 'none',
+    verticalFlag: trackFlag.value && maxHeightFlag.value ? 'block' : 'none',
     //false为水平
     horizonFlag: trackFlag.value ? 'none' : 'block'
   }
@@ -173,15 +201,20 @@ const scrollStyle = computed(() => {
     thumbWidth: `${thumbWidth.value}px`,
     thumbTransform: `translateY(${thumbTop}px)`,
     containerHeight: `${containerRef.value?.offsetHeight}px`,
-    containerWidth: `${containerRef.value?.offsetWidth}px`
+    containerWidth: `${containerRef.value?.offsetWidth}px`,
   };
 });
+
+
 // 接收 height 属性 
 const props = defineProps({
   height: {
     type: String,
     default: '100%',
   },
+  maxHeight: {
+    type: String,
+  }
 })
 </script> 
 <style scoped lang="scss"> .l-scrollbar-container {
@@ -189,6 +222,7 @@ const props = defineProps({
    overflow: hidden;
    width: 100%;
    height: v-bind('props.height');
+   max-height: v-bind('props.maxHeight');
 
    .l-scrollbar-content {
      height: max-content;
