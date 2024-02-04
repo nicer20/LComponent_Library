@@ -35,7 +35,7 @@
     <h2>小红点</h2>
     <p>通过一个小红点标记来告知用户有新内容。
 
-        使用 is-dot 属性。 是个布尔值。</p>
+        使用 isDot 属性。 是个布尔值。</p>
     <!-- <br /> -->
     <div class="example-showcase">
         <Demo4 />
