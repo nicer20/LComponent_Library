@@ -29,9 +29,14 @@ export const constRoutes = [
       },
       {
         path:'data_show',
-        name:"数据展示",
+        name:"Data 数据展示",
         redirect:'/table',
         children:[
+          {
+            path:'badge',
+            name:'Badge',
+            component: () => import('../../packages/badge/doc/Demo.vue')
+          },
           {
             path:'table',
             name:'Table',
