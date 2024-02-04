@@ -68,7 +68,7 @@ const props = defineProps({
 }
 
 .primary {
-    background-color: #1890ff;
+    background-color: #409eff;
 }
 
 .warning {
@@ -89,9 +89,5 @@ const props = defineProps({
     height: 8px;
     border-radius: 50%;
     background-color: #f5222d;
-}
-
-.primary {
-    background-color: #409eff;
 }
 </style>
