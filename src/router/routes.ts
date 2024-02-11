@@ -24,6 +24,11 @@ export const constRoutes = [
             path: 'menu',
             name: 'Menu',
             component: () => import('../../packages/menu/doc/Demo.vue')
+          },
+          {
+            path: 'slider',
+            name: 'Slider',
+            component: () => import('../../packages/slider/doc/Demo.vue')
           }
         ]
       },
