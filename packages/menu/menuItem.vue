@@ -17,6 +17,8 @@ const itemData = reactive({
   isActive: false
 })
 
+const emit = defineEmits(['on-select'])
+
 const handleActive = () => {
   itemData.isActive = true
 }
@@ -37,7 +39,7 @@ onMounted(() => {
 })
 
 const handleClick = () => {
-  // if (!itemData.isActive) emit('clickItem', itemData)
+  if (!props.disabled) emit('on-select', itemData.index)
   // itemData.isActive = !itemData.isActive
   ancestor?.exposed?.handleClickItem(itemData.index)
 }
