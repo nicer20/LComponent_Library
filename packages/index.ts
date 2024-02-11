@@ -4,6 +4,7 @@ import { ButtonPlugin } from './button'
 import { PreviewPlugin } from './utils'
 import { DividerPlugin } from './divider'
 import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
+import { SliderPlugin } from './slider'
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -13,6 +14,7 @@ const LPlugin: Plugin = {
     MenuPlugin.install?.(app)
     MenuItemPlugin.install?.(app)
     SubMenuPlugin.install?.(app)
+    SliderPlugin.install?.(app)
   }
 }
 
@@ -21,3 +23,4 @@ export * from './button'
 export * from './utils'
 export * from './divider'
 export * from './menu'
+export * from './slider'
