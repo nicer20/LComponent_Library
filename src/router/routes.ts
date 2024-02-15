@@ -29,21 +29,32 @@ export const constRoutes = [
             path: 'scrollbar',
             name: 'Scrollbar',
             component: () => import('../../packages/scrollbar/doc/Demo.vue')
+          },
+          {
+            path: 'slider',
+            name: 'Slider',
+            component: () => import('../../packages/slider/doc/Demo.vue')
           }
         ]
       },
       {
-        path:'data_show',
-        name:"数据展示",
-        redirect:'/table',
-        children:[
+        path: 'data_show',
+        name: "数据展示",
+        redirect: '/table',
+        children: [
           {
-            path:'table',
-            name:'Table',
+            path: 'badge',
+            name: 'Badge',
+            component: () => import('../../packages/badge/doc/Demo.vue')
+          },
+          {
+            path: 'table',
+            name: 'Table',
             component: () => import('../../packages/table/doc/Demo.vue')
           }
-        ]},
-        {
+        ]
+      },
+      {
 
         path: 'form',
         name: 'Form 表单组件',
