@@ -26,6 +26,11 @@ export const constRoutes = [
             component: () => import('../../packages/menu/doc/Demo.vue')
           },
           {
+            path: 'scrollbar',
+            name: 'Scrollbar',
+            component: () => import('../../packages/scrollbar/doc/Demo.vue')
+          },
+          {
             path: 'slider',
             name: 'Slider',
             component: () => import('../../packages/slider/doc/Demo.vue')
@@ -33,22 +38,23 @@ export const constRoutes = [
         ]
       },
       {
-        path:'data_show',
-        name:"Data 数据展示",
-        redirect:'/table',
-        children:[
+        path: 'data_show',
+        name: "数据展示",
+        redirect: '/table',
+        children: [
           {
-            path:'badge',
-            name:'Badge',
+            path: 'badge',
+            name: 'Badge',
             component: () => import('../../packages/badge/doc/Demo.vue')
           },
           {
-            path:'table',
-            name:'Table',
+            path: 'table',
+            name: 'Table',
             component: () => import('../../packages/table/doc/Demo.vue')
           }
-        ]},
-        {
+        ]
+      },
+      {
 
         path: 'form',
         name: 'Form 表单组件',

@@ -8,7 +8,8 @@ import { SliderPlugin } from './slider'
 import { TablePlugin } from './table'
 import { BadgePlugin } from './badge'
 // wly
-import { SwitchPlugin } from './switch'
+import { SwitchPlugin } from "./switch"
+import { ScrollbarPlugin } from "./scrollbar";
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -23,6 +24,7 @@ const LPlugin: Plugin = {
     BadgePlugin.install?.(app)
 
     SwitchPlugin.install?.(app)
+    ScrollbarPlugin.install?.(app)
   }
 }
 
