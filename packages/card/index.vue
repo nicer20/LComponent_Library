@@ -1,13 +1,13 @@
 <template>
   <div class="l-card" ref="cardRef">
-    <div class="l-card__header">
+    <div class="l-card__header" v-if="$slots.header">
       <slot name="header"></slot>
     </div>
     <div class="l-card__body">
       <slot></slot>
       <slot name="body"></slot>
     </div>
-    <div class="l-card__footer">
+    <div class="l-card__footer" v-if="$slots.footer">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -31,6 +31,8 @@ onMounted(() => {
     if (cardRef.value) {
       cardRef.value.classList.add('is-always-shadow')
     }
+  } else if (props.shadow === 'hover') {
+    cardRef.value.classList.add('is-hover-shadow')
   }
 })
 </script>
@@ -40,6 +42,7 @@ onMounted(() => {
 .l-card {
   overflow: hidden;
   border-radius: 4px;
+  width: 100%;
   border: 1px solid #e4e7ed;
   background-color: #ffffff;
   color: #303133;
@@ -61,5 +64,13 @@ onMounted(() => {
 
 .is-always-shadow {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+}
+
+.is-hover-shadow {
+  transition: all .3s;
+
+  &:hover {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
+  }
 }
 </style>

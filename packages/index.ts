@@ -10,6 +10,7 @@ import { BadgePlugin } from './badge'
 // wly
 import { SwitchPlugin } from "./switch"
 import { ScrollbarPlugin } from "./scrollbar";
+import { CardPlugin } from './card/index'
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -22,9 +23,9 @@ const LPlugin: Plugin = {
     SliderPlugin.install?.(app)
     TablePlugin.install?.(app)
     BadgePlugin.install?.(app)
-
     SwitchPlugin.install?.(app)
     ScrollbarPlugin.install?.(app)
+    CardPlugin.install?.(app)
   }
 }
 
@@ -37,3 +38,5 @@ export * from './slider'
 export * from './table'
 export * from './badge'
 export * from './switch'
+export * from './scrollbar'
+export * from './card'

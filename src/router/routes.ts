@@ -51,6 +51,11 @@ export const constRoutes = [
             path: 'table',
             name: 'Table',
             component: () => import('../../packages/table/doc/Demo.vue')
+          },
+          {
+            path: 'card',
+            name: 'Card',
+            component: () => import('../../packages/card/doc/Demo.vue')
           }
         ]
       },
