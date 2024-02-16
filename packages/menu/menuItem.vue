@@ -1,29 +1,47 @@
 <template>
-  <li class="l-menu-item" :class="lClass" @click="handleClick" tabindex="-1">
+  <li class="l-menu-item" role="listitem" :class="lClass" @click="handleClick" tabindex="-1">
     <span><slot></slot></span>
   </li>
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed, getCurrentInstance } from 'vue'
+import { reactive, computed, getCurrentInstance, onMounted } from 'vue'
 import { findAncestor } from '../utils/utils'
 
-const emit = defineEmits(['clickItem'])
 const props = defineProps({
   index: String,
   disabled: Boolean
 })
-//获取当前组件实例
-const instance = getCurrentInstance()
-//找到外层menu
-let ancestor = findAncestor(instance, 'l-menu')
 const itemData = reactive({
   index: props.index,
   isActive: false
 })
+
+const emit = defineEmits(['on-select'])
+
+const handleActive = () => {
+  itemData.isActive = true
+}
+const handleDisactive = () => {
+  itemData.isActive = false
+}
+
+defineExpose({
+  itemData,
+  handleActive,
+  handleDisactive
+})
+//获取当前组件实例
+const instance = getCurrentInstance()
+let ancestor = findAncestor(instance, 'l-menu')
+onMounted(() => {
+  ancestor?.exposed?.addItem(instance)
+})
+
 const handleClick = () => {
-  itemData.isActive = !itemData.isActive
-  emit('clickItem', itemData)
+  if (!props.disabled) emit('on-select', itemData.index)
+  // itemData.isActive = !itemData.isActive
+  ancestor?.exposed?.handleClickItem(itemData.index)
 }
 
 const lClass = computed(() => {
@@ -40,9 +58,13 @@ export default {
 <style scoped lang="scss">
 @import '../style/variable.scss';
 .l-menu-item {
+  width: auto;
+  min-width: 150px;
   font-size: large;
   cursor: pointer;
   list-style-type: none;
+  margin-left: 10px;
+  box-sizing: border-box;
   &:hover {
     background-color: #ecf5ff;
   }

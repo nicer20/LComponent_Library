@@ -7,6 +7,7 @@ export const constRoutes = [
     children: [
       {
         path: 'base',
+        name: 'Base 基础',
         redirect: '/button',
         children: [
           {
@@ -23,7 +24,52 @@ export const constRoutes = [
             path: 'menu',
             name: 'Menu',
             component: () => import('../../packages/menu/doc/Demo.vue')
+          },
+          {
+            path: 'scrollbar',
+            name: 'Scrollbar',
+            component: () => import('../../packages/scrollbar/doc/Demo.vue')
+          },
+          {
+            path: 'slider',
+            name: 'Slider',
+            component: () => import('../../packages/slider/doc/Demo.vue')
           }
+        ]
+      },
+      {
+        path: 'data_show',
+        name: "数据展示",
+        redirect: '/table',
+        children: [
+          {
+            path: 'badge',
+            name: 'Badge',
+            component: () => import('../../packages/badge/doc/Demo.vue')
+          },
+          {
+            path: 'table',
+            name: 'Table',
+            component: () => import('../../packages/table/doc/Demo.vue')
+          },
+          {
+            path: 'card',
+            name: 'Card',
+            component: () => import('../../packages/card/doc/Demo.vue')
+          }
+        ]
+      },
+      {
+
+        path: 'form',
+        name: 'Form 表单组件',
+        redirect: '/switch',
+        children: [
+          {
+            path: 'switch',
+            name: 'Switch',
+            component: () => import('../../packages/switch/doc/Demo.vue')
+          },
         ]
       }
     ]
