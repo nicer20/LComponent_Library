@@ -6,7 +6,14 @@
 
 
 <script setup lang='ts'>
-
+import { provide } from "vue";
+const props = defineProps({
+  gutter: {
+    type: Number,
+    default: 0,
+  }
+})
+provide('gutter', props.gutter);
 </script>
 
 
