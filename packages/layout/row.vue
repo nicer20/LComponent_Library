@@ -11,6 +11,10 @@ const props = defineProps({
   gutter: {
     type: Number,
     default: 0,
+  },
+  justify: {
+    type: String,
+
   }
 })
 provide('gutter', props.gutter);
@@ -23,5 +27,6 @@ provide('gutter', props.gutter);
   flex-wrap: wrap;
   position: relative;
   box-sizing: border-box;
+  justify-content: v-bind('props.justify');
 }
 </style>
