@@ -7,11 +7,12 @@ import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
 import { SliderPlugin } from './slider'
 import { TablePlugin } from './table'
 import { BadgePlugin } from './badge'
-// wly
 import { SwitchPlugin } from "./switch"
 import { ScrollbarPlugin } from "./scrollbar";
 import { CardPlugin } from './card'
 import { LayoutRowPlugin, LayoutColPlugin } from './layout'
+import {CarouselItemPlugin} from "./carousel/index";
+import {CarouselPlugin} from "./carousel/index";
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -29,6 +30,8 @@ const LPlugin: Plugin = {
     CardPlugin.install?.(app)
     LayoutRowPlugin.install?.(app)
     LayoutColPlugin.install?.(app)
+    CarouselItemPlugin.install?.(app)
+    CarouselPlugin.install?.(app)
   }
 }
 
@@ -44,3 +47,4 @@ export * from './switch'
 export * from './scrollbar'
 export * from './card'
 export * from './layout'
+export * from './carousel'

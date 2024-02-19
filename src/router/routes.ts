@@ -44,7 +44,7 @@ export const constRoutes = [
       },
       {
         path: 'data_show',
-        name: "数据展示",
+        name: "Data 数据展示",
         redirect: '/table',
         children: [
           {
