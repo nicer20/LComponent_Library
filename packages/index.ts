@@ -7,7 +7,8 @@ import { MenuPlugin, MenuItemPlugin, SubMenuPlugin } from './menu'
 import { SliderPlugin } from './slider'
 import { TablePlugin } from './table'
 import { BadgePlugin } from './badge'
-// wly
+import { CarouselPlugin} from "./carousel/index";
+import {CarouselItemPlugin} from "./carousel/index";
 import { SwitchPlugin } from "./switch"
 import { ScrollbarPlugin } from "./scrollbar";
 import { CardPlugin } from './card/index'
@@ -23,6 +24,8 @@ const LPlugin: Plugin = {
     SliderPlugin.install?.(app)
     TablePlugin.install?.(app)
     BadgePlugin.install?.(app)
+    CarouselPlugin.install?.(app)
+    CarouselItemPlugin.install?.(app)
     SwitchPlugin.install?.(app)
     ScrollbarPlugin.install?.(app)
     CardPlugin.install?.(app)
@@ -40,3 +43,4 @@ export * from './badge'
 export * from './switch'
 export * from './scrollbar'
 export * from './card'
+export * from './carousel'

@@ -56,6 +56,11 @@ export const constRoutes = [
             path: 'card',
             name: 'Card',
             component: () => import('../../packages/card/doc/Demo.vue')
+          },
+          {
+            path: 'carousel',
+            name: 'Carousel',
+            component: () => import('../../packages/carousel/doc/Demo.vue')
           }
         ]
       },
