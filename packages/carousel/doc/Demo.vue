@@ -9,7 +9,10 @@ import Demo3 from './demo3.vue'
   <h1>Carousel 走马灯</h1>
   <p>在有限空间内，循环播放同一类型的图片、文字等内容</p>
   <h2>基础用法</h2>
-  <p>结合使用 el-carousel 和 el-carousel-item 标签就得到了一个走马灯。 每一个页面的内容是完全可定制的，把你想要展示的内容放在 el-carousel-item 标签内。 默认情况下，在鼠标 hover 底部的指示器时就会触发切换。 通过设置 trigger 属性为 click，可以达到点击触发的效果</p>
+  <p>结合使用el-carousel 和 l-carousel-item 标签就得到了一个走马灯。 每一个页面的内容是完全可定制的，把你想要展示的内容放在 l-carousel-item 标签内。
+    默认情况下，在鼠标 点击 底部的指示器时就会触发切换。</p>
+  <p>配置：autoplay是否自动播放；duration设置轮播时间；initial指定初始图片；hasDot是否使用圆点指示器；dotBgColor设置圆点颜色；hasDirector是否使用方向指示器。
+  </p>
   <div class="example-showcase">
     <Demo1 />
     <l-divider></l-divider>

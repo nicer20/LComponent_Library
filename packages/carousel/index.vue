@@ -71,6 +71,14 @@ export default {
       state.currentIndex = index
     }
 
+    const mouseEnter = ()=>{// 鼠标进入，停止轮播
+      clearInterval(t)
+      t=undefined
+    }
+    const mouseLeave=()=>{
+      autoPlay()
+    }
+
     onMounted(() => {
       let len: any | undefined = instance?.slots.default()[0].children?.length
       state.itemLen = (len) ? len : 0
@@ -83,7 +91,9 @@ export default {
 
     return {
       ...toRefs(state),
-      dotClick
+      dotClick,
+      mouseEnter,
+      mouseLeave
       //   toRefs 是一种用于破坏响应式对象并将其所有属性转换为 ref 的实用方法
       //   reactive不要通过解构的方式return，不具有响应式
       //  通过 toRefs 处理，再解构返回，才具有响应式
@@ -94,7 +104,9 @@ export default {
 </script>
 
 <template>
-  <div class="carousel">
+  <div class="carousel"
+  @mouseenter="mouseEnter"
+  @mouseleave="mouseLeave">
     <div class="inner">
       <slot></slot>
       <CarDot :has-dot="hasDot"
