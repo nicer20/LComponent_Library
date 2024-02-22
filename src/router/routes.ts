@@ -44,7 +44,7 @@ export const constRoutes = [
       },
       {
         path: 'data_show',
-        name: "数据展示",
+        name: "Data 数据展示",
         redirect: '/table',
         children: [
           {
@@ -61,6 +61,11 @@ export const constRoutes = [
             path: 'card',
             name: 'Card',
             component: () => import('../../packages/card/doc/Demo.vue')
+          },
+          {
+            path: 'carousel',
+            name: 'Carousel',
+            component: () => import('../../packages/carousel/doc/Demo.vue')
           }
         ]
       },
