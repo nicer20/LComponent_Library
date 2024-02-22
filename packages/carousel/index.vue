@@ -2,11 +2,13 @@
 
 import {getCurrentInstance, onBeforeUnmount, onMounted, reactive, toRefs} from "vue";
 import CarDot from './dot.vue'
+import CarDirector from './director.vue'
 
 export default {
-  name:"Carousel",
-  components:{
-    CarDot
+  name: "Carousel",
+  components: {
+    CarDot,
+    CarDirector
   },
   props: {
     autoplay: {
@@ -29,7 +31,7 @@ export default {
       type: Boolean,
       default: true
     },
-    dotBgColor:String
+    dotBgColor: String
   },
   setup(props) {
     // 当前组件的实例
@@ -49,7 +51,8 @@ export default {
         }, props.duration)
       }
     }
-    const setIndex = (dir: string) => {// 轮播翻页
+    // 轮播前后翻页
+    const setIndex = (dir: string) => {
       switch (dir) {
         case 'next':
           state.currentIndex += 1
@@ -67,15 +70,20 @@ export default {
           break
       }
     }
-    const dotClick=(index:number)=>{
+    // 圆点指示器
+    const dotClick = (index: number) => {
       state.currentIndex = index
     }
-
-    const mouseEnter = ()=>{// 鼠标进入，停止轮播
-      clearInterval(t)
-      t=undefined
+    // 方向指示器
+    const dirClick = (dir: string) => {
+      setIndex(dir)
     }
-    const mouseLeave=()=>{
+    // 鼠标进入，停止轮播
+    const mouseEnter = () => {
+      clearInterval(t)
+      t = undefined
+    }
+    const mouseLeave = () => {
       autoPlay()
     }
 
@@ -93,7 +101,8 @@ export default {
       ...toRefs(state),
       dotClick,
       mouseEnter,
-      mouseLeave
+      mouseLeave,
+      dirClick
       //   toRefs 是一种用于破坏响应式对象并将其所有属性转换为 ref 的实用方法
       //   reactive不要通过解构的方式return，不具有响应式
       //  通过 toRefs 处理，再解构返回，才具有响应式
@@ -105,15 +114,19 @@ export default {
 
 <template>
   <div class="carousel"
-  @mouseenter="mouseEnter"
-  @mouseleave="mouseLeave">
+       @mouseenter="mouseEnter"
+       @mouseleave="mouseLeave">
     <div class="inner">
       <slot></slot>
       <CarDot :has-dot="hasDot"
-      :itemLen="itemLen"
-      :currentIndex="currentIndex"
-      :dotBgColor="dotBgColor"
-      @dotClick="dotClick"></CarDot>
+              :itemLen="itemLen"
+              :currentIndex="currentIndex"
+              :dotBgColor="dotBgColor"
+              @dotClick="dotClick"></CarDot>
+      <CarDirector dir="prev"
+                   @dirClick="dirClick"></CarDirector>
+      <CarDirector dir="next"
+                   @dirClick="dirClick"></CarDirector>
     </div>
   </div>
 </template>
