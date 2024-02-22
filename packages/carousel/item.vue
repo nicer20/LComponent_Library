@@ -1,5 +1,5 @@
 <script lang="ts">
-import {getCurrentInstance, reactive, toRefs, watch} from "vue";
+import {computed, getCurrentInstance, reactive, toRefs, watch} from "vue";
 
 export default {
   name: 'l-carousel-item',
@@ -8,25 +8,30 @@ export default {
     const instance = getCurrentInstance()
     const state = reactive({
       selfIndex: instance?.vnode.key,
-      currentIndex: instance?.parent.ctx.currentIndex
+      currentIndex: instance?.parent.ctx.currentIndex,
+      vertical:instance?.parent.ctx.vertical
     })
-
     watch(() => {
       return instance?.parent.ctx.currentIndex
     }, (value) => {
       state.currentIndex = value
     })
 
+    const lClass = computed(() => {
+      return state.vertical ? 'vertical' : 'horizontal'
+    })
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      lClass
     }
   }
 }
 </script>
 
 <template>
-  <transition>
-    <div class="carousel-item" v-if="currentIndex===selfIndex">
+  <transition :name = lClass>
+    <div class="carousel-item"  v-if="currentIndex===selfIndex">
       <slot></slot>
     </div>
   </transition>
@@ -40,21 +45,38 @@ export default {
   top: 0;
   left: 0;
 }
-//过渡效果
-.v-enter-active,
-.v-leave-active{
+//水平过渡效果
+.horizontal-enter-active,
+.horizontal-leave-active{
   transition: all .3s linear;
 }
-.v-enter-active{
+.horizontal-enter-active{
   transform: translateX(100%);
 }
-.v-enter-to{
+.horizontal-enter-to{
   transform: translateX(0);
 }
-.v-leave-active{
+.horizontal-leave-active{
   transform: translateX(0);
 }
-.v-leave-to{
+.horizontal-leave-to{
   transform: translateX(-100%);
+}
+//垂直过渡效果
+.vertical-enter-active,
+.vertical-leave-active{
+  transition: all .3s linear;
+}
+.vertical-enter-active{
+  transform: translateY(100%);
+}
+.vertical-enter-to{
+  transform: translateY(0);
+}
+.vertical-leave-active{
+  transform: translateY(0);
+}
+.vertical-leave-to{
+  transform: translateY(-100%);
 }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import {getCurrentInstance, onBeforeUnmount, onMounted, reactive, toRefs} from "vue";
+import { getCurrentInstance, onBeforeUnmount, onMounted, reactive, toRefs} from "vue";
 import CarDot from './dot.vue'
 import CarDirector from './director.vue'
 
@@ -31,7 +31,11 @@ export default {
       type: Boolean,
       default: true
     },
-    dotBgColor: String
+    dotBgColor: String,
+    vertical: {
+      Boolean,
+      default: false
+    }
   },
   setup(props) {
     // 当前组件的实例
@@ -39,7 +43,8 @@ export default {
 
     const state = reactive({//当前图片
       currentIndex: props.initial,
-      itemLen: 0 // 图片个数
+      itemLen: 0, // 图片个数
+      vertical: props.vertical //轮播方向（垂直）
     })
 
     let t: number | undefined
