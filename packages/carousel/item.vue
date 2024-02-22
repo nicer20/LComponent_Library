@@ -1,5 +1,5 @@
 <script lang="ts">
-import {getCurrentInstance, reactive, toRefs} from "vue";
+import {getCurrentInstance, reactive, toRefs, watch} from "vue";
 
 export default {
   name: 'l-carousel-item',
@@ -10,7 +10,13 @@ export default {
       selfIndex: instance?.vnode.key,
       currentIndex: instance?.parent.ctx.currentIndex
     })
-    console.log(instance)
+
+    watch(() => {
+      return instance?.parent.ctx.currentIndex
+    }, (value) => {
+      state.currentIndex = value
+    })
+
     return {
       ...toRefs(state)
     }
@@ -19,9 +25,11 @@ export default {
 </script>
 
 <template>
-  <div class="carousel-item" v-if="currentIndex===selfIndex">
-    <slot></slot>
-  </div>
+  <transition>
+    <div class="carousel-item" v-if="currentIndex===selfIndex">
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <style scoped lang="scss">
@@ -31,5 +39,22 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+//过渡效果
+.v-enter-active,
+.v-leave-active{
+  transition: all .3s linear;
+}
+.v-enter-active{
+  transform: translateX(100%);
+}
+.v-enter-to{
+  transform: translateX(0);
+}
+.v-leave-active{
+  transform: translateX(0);
+}
+.v-leave-to{
+  transform: translateX(-100%);
 }
 </style>
