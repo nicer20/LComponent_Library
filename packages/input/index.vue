@@ -2,13 +2,13 @@
   <div class="l-input">
     <div class="l-input__wrapper" ref="inputWrapperRef">
       <input class="l-input__inner" :type="props.type" :autocomplete="props.autocomplete" :tabindex="props.tabindex"
-        :placeholder="props.placeholder" @focus="handleFocus" @blur="handleBlur" />
+        :placeholder="props.placeholder" :disabled="props.disabled" @focus="handleFocus" @blur="handleBlur" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 const props = defineProps({
   type: {
     type: String,
@@ -25,7 +25,8 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: 'Please input'
-  }
+  },
+  disabled: Boolean
 })
 
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
@@ -35,7 +36,6 @@ const handleFocus = () => {
 const handleBlur = () => {
   inputWrapperRef.value.classList.remove('is-focus')
 }
-
 </script>
 
 
@@ -48,6 +48,7 @@ const handleBlur = () => {
   line-height: 32px;
   box-sizing: border-box;
   vertical-align: middle;
+
 
   .l-input__wrapper {
     display: inline-flex;
@@ -84,6 +85,12 @@ const handleBlur = () => {
       border: none;
       background: none;
       box-sizing: border-box;
+
+      &:disabled {
+        color: #a8abb2;
+        -webkit-text-fill-color: #a8abb2;
+        cursor: not-allowed;
+      }
     }
   }
 
