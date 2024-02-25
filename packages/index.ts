@@ -8,11 +8,13 @@ import { SliderPlugin } from './slider'
 import { TablePlugin } from './table'
 import { BadgePlugin } from './badge'
 import { SwitchPlugin } from "./switch"
-import { ScrollbarPlugin } from "./scrollbar";
+import { InputPlugin } from './input'
+import { ScrollbarPlugin } from "./scrollbar"
 import { CardPlugin } from './card'
 import { LayoutRowPlugin, LayoutColPlugin } from './layout'
-import {CarouselItemPlugin} from "./carousel/index";
-import {CarouselPlugin} from "./carousel/index";
+import { CarouselItemPlugin } from "./carousel/index"
+import { CarouselPlugin } from "./carousel/index"
+
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -26,6 +28,7 @@ const LPlugin: Plugin = {
     TablePlugin.install?.(app)
     BadgePlugin.install?.(app)
     SwitchPlugin.install?.(app)
+    InputPlugin.install?.(app)
     ScrollbarPlugin.install?.(app)
     CardPlugin.install?.(app)
     LayoutRowPlugin.install?.(app)
@@ -44,6 +47,7 @@ export * from './slider'
 export * from './table'
 export * from './badge'
 export * from './switch'
+export * from './input'
 export * from './scrollbar'
 export * from './card'
 export * from './layout'

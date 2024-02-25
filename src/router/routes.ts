@@ -80,6 +80,11 @@ export const constRoutes = [
             name: 'Switch',
             component: () => import('../../packages/switch/doc/Demo.vue')
           },
+          {
+            path: 'input',
+            name: 'Input',
+            component: () => import("../../packages/input/doc/Demo.vue")
+          }
         ]
       }
     ]
