@@ -14,12 +14,20 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo2"></l-preview>
   </div>
+  <h2>一键清空</h2>
+  <p>使用 <code>clearable</code> 属性即可得到一个可一键清空的输入框</p>
+  <div class="example-showcase">
+    <Demo3 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo3"></l-preview>
+  </div>
 </template>
 
 
 <script setup lang='ts'>
 import Demo1 from './demo1.vue'
 import Demo2 from './demo2.vue'
+import Demo3 from './demo3.vue'
 </script>
 
 
