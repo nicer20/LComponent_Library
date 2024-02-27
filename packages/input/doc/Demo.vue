@@ -21,6 +21,13 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo3"></l-preview>
   </div>
+  <h2>格式化</h2>
+  <p>在 <code>formatter</code> 的情况下显示值，我们通常同时使用 <code>parser</code> </p>
+  <div class="example-showcase">
+    <Demo4 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo4"></l-preview>
+  </div>
 </template>
 
 
@@ -28,6 +35,7 @@
 import Demo1 from './demo1.vue'
 import Demo2 from './demo2.vue'
 import Demo3 from './demo3.vue'
+import Demo4 from './demo4.vue'
 </script>
 
 

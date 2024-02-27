@@ -3,11 +3,11 @@
     <div class="l-input__wrapper" ref="inputWrapperRef" @mouseenter="handleMouseEnter" @mouseleave="handleMounseLeave">
       <input class="l-input__inner" :type="props.type" :autocomplete="props.autocomplete" :tabindex="props.tabindex"
         :placeholder="props.placeholder" :disabled="props.disabled" @focus="handleFocus" @blur="handleBlur"
-        :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+        :value="modelValue" @input="handleInput" @change="handleChange" />
       <span class="l-input__suffix" v-if="props.clearable && isHover && props.modelValue">
         <span class="l-input__suffix-inner">
           <i class="l-icon l-input__icon l-input__clear">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="$emit('update:modelValue', '')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleClear">
               <path fill="currentColor"
                 d="m466.752 512-90.496-90.496a32 32 0 0 1 45.248-45.248L512 466.752l90.496-90.496a32 32 0 1 1 45.248 45.248L557.248 512l90.496 90.496a32 32 0 1 1-45.248 45.248L512 557.248l-90.496 90.496a32 32 0 0 1-45.248-45.248z">
               </path>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 const props = defineProps({
   type: {
     type: String,
@@ -44,8 +44,15 @@ const props = defineProps({
   clearable: Boolean,
   modelValue: {
     type: String
+  },
+  formatter: {
+    type: Function
+  },
+  parser: {
+    type: Function
   }
 })
+const $emit = defineEmits(['update:modelValue'])
 //控制悬停
 const isHover = ref(false)
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
@@ -65,6 +72,23 @@ const handleMouseEnter = () => {
 const handleMounseLeave = () => {
   isHover.value = false
 }
+const handleClear = () => {
+  $emit('update:modelValue', '')
+}
+const handleInput = ($event: Event) => {
+  $emit('update:modelValue', (<HTMLInputElement>$event.target).value)
+  nextTick(() => {
+    const parserValue = props.parser ? props.parser(props.modelValue) : props.modelValue
+    //有formatter时处理格式化
+    const formatterValue = props.formatter ? props.formatter(parserValue) : parserValue
+    $emit('update:modelValue', formatterValue)
+  })
+}
+onMounted(() => {
+  //一开始就格式化一次
+  const formatterValue = props.formatter ? props.formatter(props.modelValue) : props.modelValue
+  $emit('update:modelValue', formatterValue)
+})
 
 </script>
 
