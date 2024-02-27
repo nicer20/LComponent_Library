@@ -31,11 +31,6 @@ export const constRoutes = [
             component: () => import('../../packages/scrollbar/doc/Demo.vue')
           },
           {
-            path: 'slider',
-            name: 'Slider',
-            component: () => import('../../packages/slider/doc/Demo.vue')
-          },
-          {
             path: 'layout',
             name: 'Layout',
             component: () => import('../../packages/layout/doc/Demo.vue')
@@ -79,6 +74,11 @@ export const constRoutes = [
             path: 'switch',
             name: 'Switch',
             component: () => import('../../packages/switch/doc/Demo.vue')
+          },
+          {
+            path: 'slider',
+            name: 'Slider',
+            component: () => import('../../packages/slider/doc/Demo.vue')
           },
         ]
       }
