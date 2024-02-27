@@ -28,6 +28,13 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo4"></l-preview>
   </div>
+  <h2>密码框</h2>
+  <p>使用 <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框</p>
+  <div class="example-showcase">
+    <Demo5 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo5"></l-preview>
+  </div>
 </template>
 
 
@@ -36,6 +43,7 @@ import Demo1 from './demo1.vue'
 import Demo2 from './demo2.vue'
 import Demo3 from './demo3.vue'
 import Demo4 from './demo4.vue'
+import Demo5 from './demo5.vue'
 </script>
 
 
