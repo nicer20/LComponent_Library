@@ -1,8 +1,8 @@
 <template>
   <div class="l-textarea" v-if="props.type === 'textarea'">
     <textarea class="l-textarea__inner" :rows="props.rows" :tabindex="props.tabindex" :autocomplete="props.autocomplete"
-      :placeholder="props.placeholder" @focus="handleFocus" @blur="handleBlur" :value="modelValue" @input="handleInput"
-      @change="handleChange" ref="textareaRef" style="min-height: 31px;"></textarea>
+      :placeholder="props.placeholder" :value="modelValue" @input="handleInput" @change="handleChange" ref="textareaRef"
+      style="min-height: 31px;"></textarea>
   </div>
   <div class="l-input" v-else>
     <div class="l-input__wrapper" ref="inputWrapperRef" @mouseenter="handleMouseEnter" @mouseleave="handleMounseLeave">
@@ -79,6 +79,9 @@ const props = defineProps({
   showPassword: Boolean,
   rows: {
     type: Number
+  },
+  autosize: {
+    type: Boolean || Object
   }
 })
 //控制密码展示，true隐藏，false展示
@@ -88,6 +91,7 @@ const $emit = defineEmits(['update:modelValue'])
 const isHover = ref(false)
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
+const textareaRef = ref<HTMLInputElement | null>(null)
 //元素聚焦处理
 const handleFocus = () => {
   inputWrapperRef.value.classList.add('is-focus')
@@ -120,19 +124,62 @@ const handleInput = ($event: Event) => {
     //有formatter时处理格式化
     const formatterValue = props.formatter ? props.formatter(parserValue) : parserValue
     $emit('update:modelValue', formatterValue)
+    if (props.autosize) {
+      //处理文本域resize
+      textareaRef.value.style.height = 'auto'; // 先将高度设置为自动，以重置高度
+      // 计算每行的高度
+      const lineHeight = parseFloat(getComputedStyle(textareaRef.value).getPropertyValue('line-height'));
+      // 计算实际高度
+      const contentHeight = textareaRef.value.scrollHeight
+      if (typeof (props.autosize) !== 'boolean') {
+        // 获取行数
+        const maxRows = props.autosize.maxRows
+        const minRows = props.autosize.minRows
+        // 设置 textarea 的高度，限制在最小和最大高度之间
+        textareaRef.value.style.height = Math.max(minRows * lineHeight, Math.min(contentHeight, maxRows * lineHeight)) + 'px';
+      }
+      else {
+        textareaRef.value.style.height = contentHeight + 'px'
+      }
+    }
   })
+
 }
 onMounted(() => {
   //一开始就格式化一次
   const formatterValue = props.formatter ? props.formatter(props.modelValue) : props.modelValue
   $emit('update:modelValue', formatterValue)
   showPassword.value = props.showPassword
+  nextTick(() => {
+    if (typeof (props.autosize) === 'boolean' && props.autosize === true) {
+      const lineHeight = parseFloat(getComputedStyle(textareaRef!.value).getPropertyValue('line-height'));
+      textareaRef.value.style.height = lineHeight + 'px'; // 先将高度设置为自动，以重置高度
+    }
+  })
 })
 
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
+* {
+  scrollbar-color: #f5f7fa;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all .2s ease-in-out;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 .l-input {
   position: relative;
   font-size: 14px;

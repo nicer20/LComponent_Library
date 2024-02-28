@@ -43,6 +43,13 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo6"></l-preview>
   </div>
+  <h2>自适应文本域</h2>
+  <p>设置文字输入类型的 <code>autosize</code> 属性使得根据内容自动调整的高度。 你可以给 <code>autosize</code> 提供一个包含有最大和最小高度的对象，让输入框自动调整。</p>
+  <div class="example-showcase">
+    <Demo7 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo7"></l-preview>
+  </div>
 </template>
 
 
@@ -53,6 +60,7 @@ import Demo3 from './demo3.vue'
 import Demo4 from './demo4.vue'
 import Demo5 from './demo5.vue'
 import Demo6 from './demo6.vue'
+import Demo7 from './demo7.vue'
 </script>
 
 
