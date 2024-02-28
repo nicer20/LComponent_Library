@@ -1,5 +1,10 @@
 <template>
-  <div class="l-input">
+  <div class="l-textarea" v-if="props.type === 'textarea'">
+    <textarea class="l-textarea__inner" :rows="props.rows" :tabindex="props.tabindex" :autocomplete="props.autocomplete"
+      :placeholder="props.placeholder" @focus="handleFocus" @blur="handleBlur" :value="modelValue" @input="handleInput"
+      @change="handleChange" ref="textareaRef" style="min-height: 31px;"></textarea>
+  </div>
+  <div class="l-input" v-else>
     <div class="l-input__wrapper" ref="inputWrapperRef" @mouseenter="handleMouseEnter" @mouseleave="handleMounseLeave">
       <input class="l-input__inner" :type="props.type" :autocomplete="props.autocomplete" :tabindex="props.tabindex"
         :placeholder="props.placeholder" :disabled="props.disabled" @focus="handleFocus" @blur="handleBlur"
@@ -71,7 +76,10 @@ const props = defineProps({
   parser: {
     type: Function
   },
-  showPassword: Boolean
+  showPassword: Boolean,
+  rows: {
+    type: Number
+  }
 })
 //控制密码展示，true隐藏，false展示
 const showPassword = ref()
@@ -218,6 +226,39 @@ onMounted(() => {
           }
         }
       }
+    }
+  }
+}
+
+.l-textarea {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: 14px;
+
+  .l-textarea__inner {
+    position: relative;
+    display: block;
+    resize: vertical;
+    padding: 5px 11px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    color: #606266;
+    background-color: #ffffff;
+    background-image: none;
+    -webkit-appearance: none;
+    box-shadow: 0 0 0 1px #dcdfe6 inset;
+    border-radius: 4px;
+    transition: box-shadow .2s cubic-bezier(.645, .045, .355, 1);
+    border: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px #409eff inset;
     }
   }
 }

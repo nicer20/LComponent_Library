@@ -35,6 +35,14 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo5"></l-preview>
   </div>
+  <h2>文本域</h2>
+  <p>用于输入多行文本信息可缩放的输入框。 添加 <code>type="textarea"</code> 属性来将 <code>input</code> 元素转换为原生的 <code>textarea</code> 元素。</p>
+  <p>文本域高度可通过 <code>rows</code> 属性控制</p>
+  <div class="example-showcase">
+    <Demo6 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo6"></l-preview>
+  </div>
 </template>
 
 
@@ -44,6 +52,7 @@ import Demo2 from './demo2.vue'
 import Demo3 from './demo3.vue'
 import Demo4 from './demo4.vue'
 import Demo5 from './demo5.vue'
+import Demo6 from './demo6.vue'
 </script>
 
 
