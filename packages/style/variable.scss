@@ -1,3 +1,7 @@
+$l-success:#67c23a;
+$l-warning:#e6a23c;
+$l-exception:#f56c6c;
+$l-default:#409eff;
 //浅灰边框颜色
 $l-border-color-lightgrey: #dcdfe6;
 //代码展示盒子背景颜色
@@ -21,4 +25,6 @@ $l-carousel_dot:#fff;
 $l-carousel_dot-wrapper:rgba(255,255,255,.3);
 //director颜色
 $l-carousel_director:#fff;
-$l-carousel_director-bg:rgba(0,0,0,.3)
+$l-carousel_director-bg:rgba(0,0,0,.3);
+//progress颜色
+$l-progress-bg:#ebeef5;
