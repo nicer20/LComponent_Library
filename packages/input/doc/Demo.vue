@@ -50,6 +50,14 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo7"></l-preview>
   </div>
+  <h2>复合型输入框</h2>
+  <p>可以在输入框中前置或后置一个元素，通常是标签或按钮。</p>
+  <p>可通过 <code>slot</code> 来指定在 Input 中分发的前置或者后置的内容。</p>
+  <div class="example-showcase">
+    <Demo8 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo8"></l-preview>
+  </div>
 </template>
 
 
@@ -61,6 +69,7 @@ import Demo4 from './demo4.vue'
 import Demo5 from './demo5.vue'
 import Demo6 from './demo6.vue'
 import Demo7 from './demo7.vue'
+import Demo8 from './demo8.vue'
 </script>
 
 

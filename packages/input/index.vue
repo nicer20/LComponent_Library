@@ -4,7 +4,14 @@
       :placeholder="props.placeholder" :value="modelValue" @input="handleInput" @change="handleChange" ref="textareaRef"
       style="min-height: 31px;"></textarea>
   </div>
-  <div class="l-input" v-else>
+  <div class="l-input" :class="{
+    'l-input-group': $slots.prepend || $slots.append,
+    'l-input-group--prepend': $slots.prepend,
+    'l-input-group--append': $slots.append
+  }" v-else>
+    <div class="l-input-group__prepend" v-if="$slots.prepend">
+      <slot name="prepend"></slot>
+    </div>
     <div class="l-input__wrapper" ref="inputWrapperRef" @mouseenter="handleMouseEnter" @mouseleave="handleMounseLeave">
       <input class="l-input__inner" :type="props.type" :autocomplete="props.autocomplete" :tabindex="props.tabindex"
         :placeholder="props.placeholder" :disabled="props.disabled" @focus="handleFocus" @blur="handleBlur"
@@ -43,11 +50,14 @@
         </span>
       </span>
     </div>
+    <div class="l-input-group__append" v-if="$slots.append">
+      <slot name="append"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
 const props = defineProps({
   type: {
     type: String,
@@ -92,6 +102,9 @@ const isHover = ref(false)
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const textareaRef = ref<HTMLInputElement | null>(null)
+//前后插槽
+const prependSlot = ref<HTMLInputElement | null>(null)
+const appendSlot = ref<HTMLInputElement | null>(null)
 //元素聚焦处理
 const handleFocus = () => {
   inputWrapperRef.value.classList.add('is-focus')
@@ -145,6 +158,7 @@ const handleInput = ($event: Event) => {
   })
 
 }
+
 onMounted(() => {
   //一开始就格式化一次
   const formatterValue = props.formatter ? props.formatter(props.modelValue) : props.modelValue
@@ -163,6 +177,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 * {
+  box-sizing: border-box;
   scrollbar-color: #f5f7fa;
 }
 
@@ -189,6 +204,42 @@ onMounted(() => {
   line-height: 32px;
   box-sizing: border-box;
   vertical-align: middle;
+
+
+  &.l-input-group {
+    display: inline-flex;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .l-input-group__append,
+  .l-input-group__prepend {
+    background-color: #f5f7fa;
+    color: #909399;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    border-radius: 4px;
+    padding: 0 20px;
+    white-space: nowrap;
+  }
+
+  .l-input-group__prepend {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: 1px 0 0 0 #dcdfe6 inset;
+  }
+
+  .l-input-group__append {
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: 0 1px 0 0 #dcdfe6 inset;
+  }
+
 
 
   .l-input__wrapper {
@@ -274,6 +325,20 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+.l-input-group--prepend {
+  >.l-input__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.l-input-group--append {
+  >.l-input__wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
