@@ -1,9 +1,11 @@
 <template>
   <div class="l-textarea" v-if="props.type === 'textarea'">
     <textarea class="l-textarea__inner" :rows="props.rows" :tabindex="props.tabindex" :autocomplete="props.autocomplete"
-      :placeholder="props.placeholder" :value="modelValue" @input="handleInput" @change="handleChange" ref="textareaRef"
-      style="min-height: 31px;"></textarea>
+      :placeholder="props.placeholder" :maxlength="+props.maxlength" :minlength="+props.minlength" :value="modelValue"
+      @input="handleInput" @change="handleChange" ref="textareaRef" style="min-height: 31px;"></textarea>
+    <span class="l-input__count" v-if="props.showWordLimit">{{ count }} / {{ props.maxlength }}</span>
   </div>
+
   <div class="l-input" :class="{
     'l-input-group': $slots.prepend || $slots.append,
     'l-input-group--prepend': $slots.prepend,
@@ -16,11 +18,14 @@
     </div>
     <div class="l-input__wrapper" ref="inputWrapperRef" @mouseenter="handleMouseEnter" @mouseleave="handleMounseLeave">
       <input class="l-input__inner" :type="props.type" :autocomplete="props.autocomplete" :tabindex="props.tabindex"
-        :placeholder="props.placeholder" :disabled="props.disabled" @focus="handleFocus" @blur="handleBlur"
-        :value="modelValue" @input="handleInput" @change="handleChange" ref="inputRef" />
-      <span class="l-input__suffix" v-if="props.clearable && isHover && props.modelValue">
+        :placeholder="props.placeholder" :disabled="props.disabled" :maxlength="+props.maxlength"
+        :minlength="+props.minlength" @focus="handleFocus" @blur="handleBlur" :value="modelValue" @input="handleInput"
+        @change="handleChange" ref="inputRef" />
+      <span class="l-input__suffix" v-if="(props.clearable && isHover && props.modelValue) || props.showWordLimit">
         <span class="l-input__suffix-inner">
-          <i class="l-icon l-input__icon l-input__clear">
+          <span class="l-input__count" v-if="props.showWordLimit">{{ count }} / {{
+            props.maxlength }}</span>
+          <i class="l-icon l-input__icon l-input__clear" v-if="props.clearable">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" @click="handleClear">
               <path fill="currentColor"
                 d="m466.752 512-90.496-90.496a32 32 0 0 1 45.248-45.248L512 466.752l90.496-90.496a32 32 0 1 1 45.248 45.248L557.248 512l90.496 90.496a32 32 0 1 1-45.248 45.248L512 557.248l-90.496 90.496a32 32 0 0 1-45.248-45.248z">
@@ -97,11 +102,20 @@ const props = defineProps({
   },
   size: {
     type: String,
-  }
+  },
+  maxlength: {
+    type: String || Number
+  },
+  minlength: {
+    type: String || Number
+  },
+  showWordLimit: Boolean
 })
 //控制密码展示，true隐藏，false展示
 const showPassword = ref()
 const $emit = defineEmits(['update:modelValue'])
+//字数
+let count = ref(0)
 //控制悬停
 const isHover = ref(false)
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
@@ -136,9 +150,12 @@ const handleInput = ($event: Event) => {
   $emit('update:modelValue', (<HTMLInputElement>$event.target).value)
   nextTick(() => {
     const parserValue = props.parser ? props.parser(props.modelValue) : props.modelValue
+    count.value = parserValue.length
     //有formatter时处理格式化
     const formatterValue = props.formatter ? props.formatter(parserValue) : parserValue
+
     $emit('update:modelValue', formatterValue)
+
     if (props.autosize) {
       //处理文本域resize
       textareaRef.value.style.height = 'auto'; // 先将高度设置为自动，以重置高度
@@ -304,6 +321,18 @@ onMounted(() => {
         align-items: center;
         justify-content: center;
 
+        &>:first-child {
+          margin-left: 8px;
+        }
+
+        .l-input__count {
+          height: 100%;
+          display: inline-flex;
+          align-items: center;
+          color: #909399;
+          font-size: 12px;
+        }
+
         .l-icon {
           height: inherit;
           line-height: inherit;
@@ -384,6 +413,16 @@ onMounted(() => {
       outline: none;
       box-shadow: 0 0 0 1px #409eff inset;
     }
+  }
+
+  .l-input__count {
+    color: #909399;
+    background: #ffffff;
+    position: absolute;
+    font-size: 12px;
+    line-height: 14px;
+    bottom: 5px;
+    right: 10px;
   }
 }
 </style>

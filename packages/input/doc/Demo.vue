@@ -65,6 +65,15 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo9"></l-preview>
   </div>
+  <h2>输入长度限制</h2>
+  <p>使用 <code>maxlength</code> 和 <code>minlength</code> 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用JavaScript字符串长度来衡量。 为文本或文本输入类型设置
+    <code>maxlength</code> prop可以限制输入值的长度。 允许你通过设置 <code>show-word-limit</code> 到 <code>true</code> 来显示剩余字数。
+  </p>
+  <div class="example-showcase">
+    <Demo10 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo10"></l-preview>
+  </div>
 </template>
 
 
@@ -78,6 +87,7 @@ import Demo6 from './demo6.vue'
 import Demo7 from './demo7.vue'
 import Demo8 from './demo8.vue'
 import Demo9 from './demo9.vue'
+import Demo10 from './demo10.vue'
 </script>
 
 
