@@ -22,7 +22,7 @@ const updateValue = () =>{
 <style scoped lang="scss">
 .l-row {
   width: 400px;
-  .l-process + .l-process {
+  .l-progress + .l-progress {
     margin-left: 12px;
   }
 }
