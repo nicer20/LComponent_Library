@@ -36,6 +36,7 @@ import Demo3 from './demo3.vue'
 
 <style lang="scss">
 @import '../../style/variable.scss';
+
 .example-showcase {
   background-color: white;
   width: 100%;

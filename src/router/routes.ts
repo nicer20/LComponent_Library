@@ -76,6 +76,11 @@ export const constRoutes = [
             component: () => import('../../packages/switch/doc/Demo.vue')
           },
           {
+            path: 'input',
+            name: 'Input',
+            component: () => import("../../packages/input/doc/Demo.vue")
+          },
+          {
             path: 'slider',
             name: 'Slider',
             component: () => import('../../packages/slider/doc/Demo.vue')
