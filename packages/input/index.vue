@@ -7,7 +7,9 @@
   <div class="l-input" :class="{
     'l-input-group': $slots.prepend || $slots.append,
     'l-input-group--prepend': $slots.prepend,
-    'l-input-group--append': $slots.append
+    'l-input-group--append': $slots.append,
+    'l-input--large': props.size === 'large',
+    'l-input--small': props.size === 'small',
   }" v-else>
     <div class="l-input-group__prepend" v-if="$slots.prepend">
       <slot name="prepend"></slot>
@@ -57,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick, computed } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 const props = defineProps({
   type: {
     type: String,
@@ -92,6 +94,9 @@ const props = defineProps({
   },
   autosize: {
     type: Boolean || Object
+  },
+  size: {
+    type: String,
   }
 })
 //控制密码展示，true隐藏，false展示
@@ -102,9 +107,6 @@ const isHover = ref(false)
 const inputWrapperRef = ref<HTMLInputElement | null>(null)
 const inputRef = ref<HTMLInputElement | null>(null)
 const textareaRef = ref<HTMLInputElement | null>(null)
-//前后插槽
-const prependSlot = ref<HTMLInputElement | null>(null)
-const appendSlot = ref<HTMLInputElement | null>(null)
 //元素聚焦处理
 const handleFocus = () => {
   inputWrapperRef.value.classList.add('is-focus')
@@ -340,6 +342,16 @@ onMounted(() => {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
+}
+
+.l-input--large {
+  height: 40px;
+  font-size: 14px;
+}
+
+.l-input--small {
+  height: 24px;
+  font-size: 12px;
 }
 
 .l-textarea {

@@ -31,11 +31,6 @@ export const constRoutes = [
             component: () => import('../../packages/scrollbar/doc/Demo.vue')
           },
           {
-            path: 'slider',
-            name: 'Slider',
-            component: () => import('../../packages/slider/doc/Demo.vue')
-          },
-          {
             path: 'layout',
             name: 'Layout',
             component: () => import('../../packages/layout/doc/Demo.vue')
@@ -84,7 +79,12 @@ export const constRoutes = [
             path: 'input',
             name: 'Input',
             component: () => import("../../packages/input/doc/Demo.vue")
-          }
+          },
+          {
+            path: 'slider',
+            name: 'Slider',
+            component: () => import('../../packages/slider/doc/Demo.vue')
+          },
         ]
       }
     ]

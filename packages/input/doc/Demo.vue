@@ -58,6 +58,13 @@
     <l-divider></l-divider>
     <l-preview compName="input" demoName="demo8"></l-preview>
   </div>
+  <h2>尺寸</h2>
+  <p>使用 <code>size</code> 属性改变输入框大小。 除了默认大小外，还有另外两个选项： <code>large</code> , <code>small</code> 。</p>
+  <div class="example-showcase">
+    <Demo9 />
+    <l-divider></l-divider>
+    <l-preview compName="input" demoName="demo9"></l-preview>
+  </div>
 </template>
 
 
@@ -70,6 +77,7 @@ import Demo5 from './demo5.vue'
 import Demo6 from './demo6.vue'
 import Demo7 from './demo7.vue'
 import Demo8 from './demo8.vue'
+import Demo9 from './demo9.vue'
 </script>
 
 
