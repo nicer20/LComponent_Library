@@ -26,22 +26,8 @@ const props = defineProps({
     default: false
   }
 })
-let textRight:String = 100-props.value+2+'%'
-
-
-import {ref, onMounted} from 'vue'
-
-const color = ref('#409eff')
-const offset = ref(0)
+let textRight: String = 100 - props.value + 2 + '%'
 const circumference = 2 * Math.PI * 45
-onMounted(() => {
-  setInterval(() => {
-    offset.value = offset.value + 1
-    if (offset.value > circumference) {
-      offset.value = 0
-    }
-  }, 20)
-})
 </script>
 
 <template>
@@ -56,7 +42,9 @@ onMounted(() => {
     <p v-else-if="(status==='warning')">Warning</p>
     <p v-else-if="(status==='exception')">Error</p>
   </div>
-  <div v-else-if="type==='circle'" class="circle-progress">
+  <div v-else-if="type==='circle'" class="circle-progress"
+       :class="{'success':status==='success','warning':status==='warning','exception':status==='exception'}"
+  >
     <svg class="circle" viewBox="0 0 100 100">
       <circle
           class="circle-background"
@@ -64,21 +52,24 @@ onMounted(() => {
           cy="50"
           r="45"
           fill="transparent"
-          stroke="#e0e0e0"
-          stroke-width="10"
+          :style="{strokeWidth: strokeWidth}"
       />
       <circle
           class="circle-foreground"
           cx="50"
           cy="50"
           r="45"
-          fill="transparent"
-          :stroke="color"
+          fill="none"
           :stroke-dasharray="circumference"
-          :stroke-dashoffset="offset"
-          stroke-width="10"
+          :stroke-dashoffset="circumference-value/100*circumference"
+          :style="{strokeWidth: strokeWidth}"
       />
     </svg>
+    <p v-if="(status==='default'&&value<100)"> {{ value }}%</p>
+    <p v-else-if="(status==='default'&&value===100)">Full</p>
+    <p v-else-if="(status==='success')">Success</p>
+    <p v-else-if="(status==='warning')">Warning</p>
+    <p v-else-if="(status==='exception')">Error</p>
   </div>
 </template>
 
@@ -141,6 +132,7 @@ onMounted(() => {
   .l-progress {
     width: 100%;
   }
+
   p {
     position: absolute;
     right: v-bind(textRight);
@@ -148,91 +140,64 @@ onMounted(() => {
   }
 }
 
-//.circle-progress {
-//  .circle {
-//    transform: rotate(-90deg);
-//    transform-origin: 50% 50%;
-//  }
-//
-//  .circle-background {
-//    transition: stroke-dashoffset 0.6s ease 0s;
-//  }
-//
-//  .circle-foreground {
-//    stroke-linecap: round;
-//    transition: stroke-dashoffset 0.6s ease 0s;
-//  }
-//}
+.circle-progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+
+  p {
+    position: absolute;
+  }
+
+  .circle {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  .circle-background {
+    stroke: $l-progress-bg;
+    transition: stroke-dashoffset 0.6s ease 0s;
+  }
+
+  .circle-foreground {
+    stroke: $l-default;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s ease 0s;
+  }
+}
+
+.circle-progress.success {
+  .circle-foreground {
+    stroke: $l-success;
+  }
+
+  p {
+    color: $l-success;
+  }
+}
+
+.circle-progress.warning {
+  .circle-foreground {
+    stroke: $l-warning;
+  }
+
+  p {
+    color: $l-warning;
+
+  }
+}
+
+.circle-progress.exception {
+  .circle-foreground {
+    stroke: $l-exception;
+  }
+
+  p {
+    color: $l-exception;
+  }
+}
 </style>
-
-<!--<template>-->
-<!--  <div class="circle-progress">-->
-<!--    <svg class="circle" viewBox="0 0 100 100">-->
-<!--      <circle-->
-<!--          class="circle-background"-->
-<!--          cx="50"-->
-<!--          cy="50"-->
-<!--          r="45"-->
-<!--          fill="transparent"-->
-<!--          stroke="#e0e0e0"-->
-<!--          stroke-width="10"-->
-<!--      />-->
-<!--      <circle-->
-<!--          class="circle-foreground"-->
-<!--          cx="50"-->
-<!--          cy="50"-->
-<!--          r="45"-->
-<!--          fill="transparent"-->
-<!--          :stroke="color"-->
-<!--          :stroke-dasharray="circumference"-->
-<!--          :stroke-dashoffset="offset"-->
-<!--          stroke-width="10"-->
-<!--      />-->
-<!--    </svg>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  props: {-->
-<!--    progress: {-->
-<!--      type: Number,-->
-<!--      required: true,-->
-<!--      default: 0,-->
-<!--    },-->
-<!--    color: {-->
-<!--      type: String,-->
-<!--      default: "#0074D9",-->
-<!--    },-->
-<!--  },-->
-<!--  computed: {-->
-<!--    circumference() {-->
-<!--      return 2 * Math.PI * 45;-->
-<!--    },-->
-<!--    offset() {-->
-<!--      return this.circumference * (1 - this.progress / 100);-->
-<!--    },-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--.circle-progress {-->
-<!--  width: 100px;-->
-<!--  height: 100px;-->
-<!--}-->
-
-<!--.circle {-->
-<!--  transform: rotate(-90deg);-->
-<!--}-->
-
-<!--.circle-background {-->
-<!--  transition: stroke-dashoffset 0.3s ease;-->
-<!--}-->
-
-<!--.circle-foreground {-->
-<!--  transition: stroke-dashoffset 0.3s ease;-->
-<!--}-->
-<!--</style>-->
 
 

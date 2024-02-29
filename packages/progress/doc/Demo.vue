@@ -18,21 +18,20 @@ import Demo3 from './demo3.vue'
   </div>
   <h2>进度条内显示百分比标识</h2>
   <p>百分比不占用额外空间，适用于文件上传等场景。</p>
-  <p>Progress 组件可通过 stroke-width 属性更改进度条的高度，
+  <p>Progress 组件可通过 stroke-width 属性更改进度条的宽度，
     并可通过 text-inside 属性来改变进度条内部的文字。</p>
   <div class="example-showcase">
     <Demo2 />
     <l-divider></l-divider>
     <l-preview compName="progress" demoName="demo2"></l-preview>
   </div>
-  <!--<h2>尺寸</h2>-->
-  <!--<p>你可以使用 size 属性来设置开关尺寸。</p>-->
-  <!--<p>使用 size 属性来设置开关尺寸。 该属性可设置为"large"或"small"。</p>-->
-  <!--<div class="example-showcase">-->
-  <!--  <Demo3 />-->
-  <!--  <l-divider></l-divider>-->
-  <!--  <l-preview compName="switch" demoName="demo3"></l-preview>-->
-  <!--</div>-->
+  <h2>环形进度条</h2>
+  <p> Progress 组件可通过 type 属性来指定使用环形进度条。环形进度条也可通过 stroke-width 属性更改进度条的宽度</p>
+  <div class="example-showcase">
+    <Demo3 />
+    <l-divider></l-divider>
+    <l-preview compName="progress" demoName="demo3"></l-preview>
+  </div>
 </template>
 
 <style scoped lang="scss">

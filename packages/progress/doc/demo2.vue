@@ -22,10 +22,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-
-</script>
-
 <style scoped lang="scss">
 .l-row {
   width: 400px;
