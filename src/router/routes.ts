@@ -85,6 +85,11 @@ export const constRoutes = [
             name: 'Slider',
             component: () => import('../../packages/slider/doc/Demo.vue')
           },
+          {
+            path: 'progress',
+            name: 'Progress',
+            component: () => import('../../packages/progress/doc/Demo.vue')
+          },
         ]
       }
     ]
