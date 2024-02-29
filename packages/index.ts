@@ -13,6 +13,7 @@ import { CardPlugin } from './card'
 import { LayoutRowPlugin, LayoutColPlugin } from './layout'
 import {CarouselItemPlugin} from "./carousel/index";
 import {CarouselPlugin} from "./carousel/index";
+import {ProgressPlugin} from "./progress/index";
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -32,6 +33,7 @@ const LPlugin: Plugin = {
     LayoutColPlugin.install?.(app)
     CarouselItemPlugin.install?.(app)
     CarouselPlugin.install?.(app)
+    ProgressPlugin.install?.(app)
   }
 }
 
@@ -48,3 +50,4 @@ export * from './scrollbar'
 export * from './card'
 export * from './layout'
 export * from './carousel'
+export * from './progress'
