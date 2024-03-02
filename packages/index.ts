@@ -15,6 +15,7 @@ import { LayoutRowPlugin, LayoutColPlugin } from './layout'
 import { CarouselItemPlugin } from "./carousel/index";
 import { CarouselPlugin } from "./carousel/index";
 import { ProgressPlugin } from "./progress/index";
+import {MessagePlugin} from './message'
 
 const LPlugin: Plugin = {
   install(app: App) {
@@ -36,6 +37,7 @@ const LPlugin: Plugin = {
     CarouselItemPlugin.install?.(app)
     CarouselPlugin.install?.(app)
     ProgressPlugin.install?.(app)
+    MessagePlugin.install?.(app)
   }
 }
 
@@ -54,3 +56,4 @@ export * from './card'
 export * from './layout'
 export * from './carousel'
 export * from './progress'
+export * from './message'

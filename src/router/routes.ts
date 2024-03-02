@@ -65,7 +65,6 @@ export const constRoutes = [
         ]
       },
       {
-
         path: 'form',
         name: 'Form 表单组件',
         redirect: '/switch',
@@ -89,6 +88,18 @@ export const constRoutes = [
             path: 'progress',
             name: 'Progress',
             component: () => import('../../packages/progress/doc/Demo.vue')
+          },
+        ]
+      },
+      {
+        path: 'feedback',
+        name: 'Feedback 反馈组件',
+        redirect: '/switch',
+        children: [
+          {
+            path: 'message',
+            name: 'Message',
+            component: () => import('../../packages/message/doc/Demo.vue')
           },
         ]
       }
