@@ -38,6 +38,11 @@ export const constRoutes = [
             component: () => import('../../packages/badge/doc/Demo.vue')
           },
           {
+            path:'skeleton',
+            name:'Skeleton',
+            component: () => import('../../packages/skeleton/doc/Demo.vue')
+          },
+          {
             path:'table',
             name:'Table',
             component: () => import('../../packages/table/doc/Demo.vue')
